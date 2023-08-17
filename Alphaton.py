@@ -69,8 +69,9 @@ if "SPY" not in selected_tickerlist:
 
 if selected_tickerlist:
     # Fetch and display SPY data separately
-    #spy_data = fetch_company_data("SPY", period=f"{selected_period}y")
+    spy_data = fetch_company_data("SPY", period=f"{selected_period}y")
     spy_data = fetch_company_data("SPY", period=f"{selected_start_date.date()} - {pd.to_datetime('today').date()}")
+
     if spy_data is not None:
         st.subheader("SPY Stock data")
         spy_data['Return'] = spy_data["Close"] - spy_data["Open"]

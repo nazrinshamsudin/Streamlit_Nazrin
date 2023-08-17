@@ -125,8 +125,10 @@ sorted_cov_corr_df = cov_corr_df.sort_values(by='Covariance with SPY', ascending
 
 # Display top 10 ticker names with their correlation and covariance values
 st.subheader("Top 10 Tickers with Correlation and Covariance")
-top_tickers = cov_corr_df.nlargest(10, ['Covariance with SPY', 'Correlation with SPY'])
-st.table(top_tickers[['Ticker', 'Correlation with SPY', 'Covariance with SPY']])
+# Display the sorted DataFrame in a table
+st.subheader("Top 10 Tickers with Correlation and Covariance")
+st.table(sorted_cov_corr_df[['Ticker', 'Correlation with SPY', 'Covariance with SPY']].head(10))
+
 
 
 # Create the scatter plot using Plotly Go

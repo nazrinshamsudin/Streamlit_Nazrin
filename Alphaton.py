@@ -157,9 +157,6 @@ selected_start_date = st.sidebar.date_input("Select Start Date", pd.to_datetime(
 # Create the scatter plot using Plotly Go
 scatter_fig = go.Figure()
 
-# Filter the selected_data_returns based on the selected start date
-selected_data_returns_filtered = selected_data_returns[selected_start_date:]
-
 
 
 # Adding scatter plot for selected companies

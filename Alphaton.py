@@ -54,6 +54,13 @@ if selected_data is not None:
     benchmark_returns = selected_data_returns["SPY"]
     relative_returns = selected_data_returns.div(benchmark_returns, axis=0)
 
+
+
+
+st.subheader("Selected Companies data")
+st.dataframe(selected_data)
+
+
 # Create a correlation heatmap
 st.subheader("Correlation Table")
 st.dataframe(correlation_matrix.style.background_gradient(cmap='coolwarm'))

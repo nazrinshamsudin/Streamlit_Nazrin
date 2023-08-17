@@ -10,14 +10,19 @@ st.write("This is the work of Nazrin Shamsudin, do enjoy the analysis of stocks 
 
 
 # FETCHING DATA AND DECLARING VARIABLE OF DATA
-def fetch_company_data(tickers, period):
-    print(tickers, "str")
-    
-    try:
-         data = yf.download(tickers, period=period, interval="1d", rounding=True, threads=True)
-         return data
-    except KeyError:
-        print(f"No data found for tickers: {tickers}")
+def fetch_company_data(tickers, periods):
+    data = []
+
+    for period in periods:
+        try:
+            period_data = yf.download(tickers, period=period, interval="1d", rounding=True, threads=True)
+            data.append(period_data)
+        except KeyError:
+            print(f"No data found for tickers: {tickers} during period: {period}")
+
+    if data:
+        return pd.concat(data)
+    else:
         return None
 
 sp500_table = wikipedia.page("List_of_S%26P_500_companies").html().encode("UTF-8")
@@ -42,8 +47,8 @@ dataframes = []
 
 st.sidebar.header("Settings")
 # Fetching selected period from the sidebar
-selected_period = st.sidebar.slider("Select Period (Years)", min_value=3, max_value=7)
-selected_data = fetch_company_data(selected_tickers + ["SPY"], period=f"{selected_period}y")
+selected_periods = [f"{selected_period}y" for _ in range(len(selected_tickerlist) + 1)]
+selected_data = fetch_company_data(selected_tickers, selected_periods)
 
 selected_tickerlist = st.sidebar.multiselect("Select Tickers", sp500_tickers, ["AAPL", "MSFT", "AMZN", "GOOGL"])
 

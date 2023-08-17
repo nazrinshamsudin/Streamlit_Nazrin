@@ -41,7 +41,7 @@ dataframes = []
 
 st.sidebar.header("Settings")
 selected_period = st.sidebar.slider("Select Period (Years)", min_value=3, max_value=7, value=5)
-selected_tickerlist = st.sidebar.multiselect("Select Tickers", sp500_tickers, ["AAPL", "MSFT", "AMZN", "GOOGL", "NVDA"])
+selected_tickerlist = st.sidebar.multiselect("Select Tickers", sp500_tickers, sp500_tickers)
 
 if selected_tickerlist:
     selected_data = fetch_company_data(selected_tickerlist + ["SPY"], period=f"{selected_period}y")

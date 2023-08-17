@@ -141,19 +141,19 @@ for ticker, covariance, correlation in zip(cov_corr_df["Ticker"], cov_corr_df["C
     scatter_fig.add_trace(go.Scatter(
         x=[correlation],
         y=[covariance],
-        mode='markers',
+        mode='markers+text',
         marker=dict(size=15),
         text=[f"{ticker} (Cov: {covariance:.2f}, Corr: {correlation:.2f})"],
         hoverinfo='text',
         name=ticker
     ))
 
-# Adding a dark green and bigger dot for SPY as a benchmark
+# Adding a green and bigger dot for SPY as a benchmark
 scatter_fig.add_trace(go.Scatter(
     x=[1.0],  # SPY correlation is always 1
     y=[covariance_matrix.loc["SPY", "SPY"]],  # SPY covariance with itself
     mode='markers',
-    marker=dict(color="red", size=15),  # Dark green and bigger dot
+    marker=dict(color="lightgreen", size=17),  # Dark green and bigger dot
     text=["SPY (Cov: Max, Corr: 1.00)"],
     hoverinfo='text',
     showlegend=False
@@ -168,18 +168,6 @@ scatter_fig.update_layout(
 )
 
 
-# Calculate the top 10 tickers based on covariance and correlation
-top_tickers = cov_corr_df.nlargest(10, ['Covariance with SPY', 'Correlation with SPY'])
-
-# Adding markers for top 10 tickers to the scatter plot
-for _, row in top_tickers.iterrows():
-    scatter_fig.add_annotation(
-        x=row['Correlation with SPY'],
-        y=row['Covariance with SPY'],
-        xshift=-20,  # Shift the text to the left
-        text=row['Ticker'],
-        showarrow=False
-    )
 
 # Display the scatter plot
 st.plotly_chart(scatter_fig)

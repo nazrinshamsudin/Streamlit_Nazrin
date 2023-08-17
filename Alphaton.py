@@ -61,7 +61,11 @@ sp500_tickers = pd.read_html(sp500_table)[0]["Symbol"].tolist()
 st.sidebar.header("Settings")
 selected_period = st.sidebar.slider("Select Period (Years)", min_value=1, max_value=7, value=5)
 selected_tickerlist = st.sidebar.multiselect("Select Tickers", sp500_tickers, ["AAPL", "MSFT", "AMZN", "GOOGL","META", "NVDA", "TSLA"])
-selected_start_date = st.sidebar.date_input("Select Start Date", pd.to_datetime('today') - pd.DateOffset(years=selected_period))
+
+
+# Date input widget
+selected_start_date = st.date_input("Select Start Date", pd.to_datetime('today') - pd.DateOffset(years=selected_period))
+
 
 # Append "SPY" to the selected_tickerlist
 if "SPY" not in selected_tickerlist:
@@ -69,7 +73,7 @@ if "SPY" not in selected_tickerlist:
 
 if selected_tickerlist:
     # Fetch and display SPY data separately
-    spy_data = fetch_company_data("SPY", period=f"{selected_period}y")
+    #spy_data = fetch_company_data("SPY", period=f"{selected_period}y")
     spy_data = fetch_company_data("SPY", period=f"{selected_start_date.date()} - {pd.to_datetime('today').date()}")
 
     if spy_data is not None:

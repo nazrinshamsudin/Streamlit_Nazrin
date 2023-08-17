@@ -120,10 +120,14 @@ cov_corr_df = pd.DataFrame(cov_corr_data)
 
 
 
-# Sort the DataFrame in ascending order of Covariance with SPY
-sorted_cov_corr_df = cov_corr_df.sort_values(by=['Covariance with SPY', 'Correlation with SPY'], ascending=[True, True])
 
-# Display top 10 ticker names with their correlation and covariance values
+
+# Sort the DataFrame in ascending order of Covariance with SPY
+sorted_cov_corr_df = cov_corr_df.sort_values(by='Covariance with SPY', ascending=True)
+
+# Display the sorted DataFrame in a table with numbered index
+sorted_cov_corr_df.reset_index(drop=True, inplace=True)
+sorted_cov_corr_df.index = sorted_cov_corr_df.index + 1
 st.subheader("Top 10 Tickers with Correlation and Covariance")
 st.table(sorted_cov_corr_df[['Ticker', 'Correlation with SPY', 'Covariance with SPY']].head(10))
 

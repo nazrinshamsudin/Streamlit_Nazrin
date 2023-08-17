@@ -27,8 +27,8 @@ selected_tickers = ["AAPL", "MSFT", "AMZN", "GOOGL", "NVDA"]
 selected_period = '1y'
 
 selected_tickers.append("SPY")
-spy_data = fetch_company_data("SPY", f"{selected_period}y")
-spy_data = fetch_company_data("SPY", selected_start_date.date())
+#spy_data = fetch_company_data("SPY", f"{selected_period}y")
+spy_data = fetch_company_data("SPY", f"{selected_start_date.date()}")
 
 
 

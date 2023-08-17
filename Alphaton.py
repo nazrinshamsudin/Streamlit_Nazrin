@@ -152,11 +152,6 @@ st.subheader("Top 10 Tickers with Correlation and Covariance")
 st.table(sorted_cov_corr_df[['Ticker', 'Correlation with SPY', 'Covariance with SPY']].head(10))
 
 
-selected_start_date = st.sidebar.date_input("Select Start Date", pd.to_datetime('today') - pd.DateOffset(years=selected_period))
-st.sidebar.write(f"Selected Start Date: {selected_start_date.date()}")
-selected_start_date = st.sidebar.date_input("Select Start Date", pd.to_datetime('today') - pd.DateOffset(years=selected_period))
-
-
 
 # Create the scatter plot using Plotly Go
 scatter_fig = go.Figure()

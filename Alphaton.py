@@ -156,33 +156,28 @@ st.table(sorted_cov_corr_df[['Ticker', 'Correlation with SPY', 'Covariance with 
 # Create the scatter plot using Plotly Go
 scatter_fig = go.Figure()
 
-# Fetch and display selected companies data
-selected_data = fetch_company_data(selected_tickerlist, period=f"{selected_period}y")
+
 
 # Adding scatter plot for selected companies
 for ticker, covariance, correlation in zip(cov_corr_df["Ticker"], cov_corr_df["Covariance with SPY"], cov_corr_df["Correlation with SPY"]):
-    if selected_data is not None:
-        data_within_date_range = selected_data[(selected_data.index >= selected_start_date.normalize()) & (selected_data.index <= pd.to_datetime('today'))]
+    scatter_fig.add_trace(go.Scatter(
+        x=[correlation],
+        y=[covariance],
+        mode='markers',
+        marker=dict(size=15),
+        text=[f"{ticker} (Cov: {covariance:.2f}, Corr: {correlation:.2f})"],
+        hoverinfo='text',
+        name=ticker
+    ))
 
-        if not data_within_date_range.empty:
-            scatter_fig.add_trace(go.Scatter(
-                x=[correlation],
-                y=[covariance],
-                mode='markers',
-                marker=dict(size=15),
-                text=[f"{ticker} (Cov: {covariance:.2f}, Corr: {correlation:.2f})"],
-                hoverinfo='text',
-                name=ticker
-            ))
-
-            # Add annotation to display ticker name
-            scatter_fig.add_annotation(
-                x=correlation,
-                y=covariance,
-                xshift=-24,  # Shift the text to the left
-                text=ticker,
-                showarrow=False
-            )
+   # Add annotation to display ticker name
+    scatter_fig.add_annotation(
+        x=correlation,
+        y=covariance,
+        xshift=-24,  # Shift the text to the left
+        text=ticker,
+        showarrow=False
+    )
 
 # Add a text annotation to display the selected start date
 if isinstance(selected_start_date, pd.Timestamp):
@@ -193,7 +188,27 @@ if isinstance(selected_start_date, pd.Timestamp):
         showarrow=False
     )
 
-# ... rest of your code ...
+# Adding a green and bigger dot for SPY as a benchmark
+scatter_fig.add_trace(go.Scatter(
+    x=[1.0],  # SPY correlation is always 1
+    y=[covariance_matrix.loc["SPY", "SPY"]],  # SPY covariance with itself
+    mode='markers',
+    marker=dict(color="lightgreen", size=21),  # Dark green and bigger dot
+    text=["SPY (Cov: Max, Corr: 1.00)"],
+    hoverinfo='text',
+    showlegend=False
+))
+
+# Update scatter plot layout
+scatter_fig.update_layout(
+    title="Covariance vs Correlation (Benchmark: SPY)",
+    xaxis_title="Correlation with SPY",
+    yaxis_title="Covariance with SPY",
+    template="plotly_white"
+)
+
+
 
 # Display the scatter plot
 st.plotly_chart(scatter_fig)
+#In this version, I've added a loop to iterate through the selected tickers and added scatter plot dots for each ticker. The x-coordinate of each dot represents the correlation with SPY, and the y-coordinate represents the covariance with SPY. This configuration creates a scatter plot with each ticker's dot placed according to its correlation and covariance with SPY. The name parameter is set to the ticker's symbol for labeling each dot.

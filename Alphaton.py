@@ -8,6 +8,7 @@ import wikipedia
 st.title("Financial Analysis Dashboard")
 st.write("This is the work of Nazrin Shamsudin, do enjoy the analysis of stocks prices.🙂")
 
+st.set_page_config(layout="wide")
 
 # FETCHING DATA AND DECLARING VARIABLE OF DATA
 def fetch_company_data(tickers, period):

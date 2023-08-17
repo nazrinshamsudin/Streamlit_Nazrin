@@ -33,7 +33,7 @@ spy_data = fetch_company_data("SPY", f"{selected_period}y")
 
 # DISPLAY TABLE
 st.subheader("SPY Stock data")
-spy_data['Return'] = spy_data["Close"] - spy_data["Open"]
+spy_data['Return'] = spy_data.Close - spy_data.Open
 spy_data['Return%'] = (spy_data["Close"] - spy_data["Open"]) / spy_data['Open'] * 100
 st.dataframe(spy_data)
 

@@ -150,6 +150,8 @@ st.table(sorted_cov_corr_df[['Ticker', 'Correlation with SPY', 'Covariance with 
 
 selected_start_date = st.sidebar.date_input("Select Start Date", pd.to_datetime('today') - pd.DateOffset(years=selected_period))
 st.sidebar.write(f"Selected Start Date: {selected_start_date.date()}")
+selected_start_date = st.sidebar.date_input("Select Start Date", pd.to_datetime('today') - pd.DateOffset(years=selected_period))
+
 
 
 # Create the scatter plot using Plotly Go
@@ -182,12 +184,13 @@ for ticker, covariance, correlation in zip(cov_corr_df["Ticker"], cov_corr_df["C
     )
 
 # Add a text annotation to display the selected start date
-scatter_fig.add_annotation(
-    x=0.1,  # Adjust the x-coordinate to position the text
-    y=0.9,  # Adjust the y-coordinate to position the text
-    text=f"Selected Start Date: {selected_start_date.date()}",
-    showarrow=False
-)
+if isinstance(selected_start_date, pd.Timestamp):
+    scatter_fig.add_annotation(
+        x=0.1,  # Adjust the x-coordinate to position the text
+        y=0.9,  # Adjust the y-coordinate to position the text
+        text=f"Selected Start Date: {selected_start_date.date()}",
+        showarrow=False
+    )
 
 # Adding a green and bigger dot for SPY as a benchmark
 scatter_fig.add_trace(go.Scatter(

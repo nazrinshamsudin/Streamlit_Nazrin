@@ -37,7 +37,8 @@ if selected_tickerlist:
     selected_data = fetch_company_data(selected_tickerlist, period=f"{selected_period}y")
     spy_data = fetch_company_data("SPY", period=f"{selected_period}y")
     if spy_data is not None and selected_data is not None:
-        selected_data = selected_data.merge(spy_data['Adj Close'], left_index=True, right_index=True)
+        selected_data = selected_data.join(spy_data['Adj Close'], on=selected_data.index, rsuffix='_SPY')
+
 
 # Display SPY Stock data
 st.subheader("SPY Stock data")

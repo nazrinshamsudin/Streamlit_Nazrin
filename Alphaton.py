@@ -79,6 +79,17 @@ if selected_tickerlist:
         st.subheader("Selected Companies data")
         st.dataframe(selected_data)
 
+
+# Calculate correlation_matrix and other necessary data
+if selected_data is not None:
+    selected_data_returns = selected_data['Adj Close'].pct_change()
+    selected_data_returns.dropna(inplace=True)
+    
+    # Calculate correlation_matrix and covariance_matrix
+    correlation_matrix = selected_data_returns.corr()
+    covariance_matrix = selected_data_returns.cov()
+
+
 # Create a correlation heatmap
 st.subheader("Correlation Table")
 st.dataframe(correlation_matrix.style.background_gradient(cmap='coolwarm'))

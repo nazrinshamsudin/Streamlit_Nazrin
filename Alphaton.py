@@ -58,7 +58,7 @@ sp500_tickers = pd.read_html(sp500_table)[0]["Symbol"].tolist()
 # Sidebar Settings
 st.sidebar.header("Settings")
 selected_period = st.sidebar.slider("Select Period (Years)", min_value=1, max_value=7, value=5)
-selected_tickerlist = st.sidebar.multiselect("Select Tickers", sp500_tickers, ["AAPL", "MSFT", "AMZN", "GOOGL", "NVDA"])
+selected_tickerlist = st.sidebar.multiselect("Select Tickers", sp500_tickers, ["AAPL", "MSFT", "AMZN", "GOOGL","META", "NVDA", "TSLA", "BRK.B", "UNH", "GOOG"])
 
 # Append "SPY" to the selected_tickerlist
 if "SPY" not in selected_tickerlist:
@@ -147,6 +147,20 @@ scatter_fig.update_layout(
     yaxis_title="Covariance with SPY",
     template="plotly_white"
 )
+
+
+# Calculate the top 10 tickers based on covariance and correlation
+top_tickers = cov_corr_df.nlargest(10, ['Covariance with SPY', 'Correlation with SPY'])
+
+# Adding markers for top 10 tickers to the scatter plot
+for _, row in top_tickers.iterrows():
+    scatter_fig.add_annotation(
+        x=row['Correlation with SPY'],
+        y=row['Covariance with SPY'],
+        xshift=-20,  # Shift the text to the left
+        text=row['Ticker'],
+        showarrow=False
+    )
 
 # Display the scatter plot
 st.plotly_chart(scatter_fig)

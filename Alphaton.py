@@ -152,6 +152,10 @@ st.table(sorted_cov_corr_df[['Ticker', 'Correlation with SPY', 'Covariance with 
 # Create the scatter plot using Plotly Go
 scatter_fig = go.Figure()
 
+# Filter the selected_data_returns based on the selected start date
+selected_data_returns_filtered = selected_data_returns[selected_start_date:]
+
+
 # Adding scatter plot for selected companies
 for ticker, covariance, correlation in zip(cov_corr_df["Ticker"], cov_corr_df["Covariance with SPY"], cov_corr_df["Correlation with SPY"]):
     scatter_fig.add_trace(go.Scatter(

@@ -26,6 +26,7 @@ def fetch_company_data(tickers, periods):
         return None
 
 
+
 sp500_table = wikipedia.page("List_of_S%26P_500_companies").html().encode("UTF-8")
 sp500_tickers = pd.read_html(sp500_table)[0]["Symbol"].tolist()
 

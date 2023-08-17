@@ -25,6 +25,7 @@ def fetch_company_data(tickers, periods):
     else:
         return None
 
+
 sp500_table = wikipedia.page("List_of_S%26P_500_companies").html().encode("UTF-8")
 sp500_tickers = pd.read_html(sp500_table)[0]["Symbol"].tolist()
 
@@ -47,8 +48,9 @@ dataframes = []
 
 st.sidebar.header("Settings")
 # Fetching selected period from the sidebar
-selected_periods = [f"{selected_period}y" for _ in range(len(selected_tickerlist) + 1)]
-selected_data = fetch_company_data(selected_tickers, selected_periods)
+selected_periods = [f"{selected_period}y" for _ in range(len(selected_tickers) + 1)]
+selected_data = fetch_company_data(selected_tickers + ["SPY"], selected_periods)
+
 
 selected_tickerlist = st.sidebar.multiselect("Select Tickers", sp500_tickers, ["AAPL", "MSFT", "AMZN", "GOOGL"])
 

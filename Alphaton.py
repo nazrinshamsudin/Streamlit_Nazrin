@@ -61,10 +61,8 @@ sp500_tickers = pd.read_html(sp500_table)[0]["Symbol"].tolist()
 st.sidebar.header("Settings")
 selected_period = st.sidebar.slider("Select Period (Years)", min_value=1, max_value=7, value=5)
 selected_tickerlist = st.sidebar.multiselect("Select Tickers", sp500_tickers, ["AAPL", "MSFT", "AMZN", "GOOGL","META", "NVDA", "TSLA"])
+selected_start_date = st.sidebar.date_input("Select Start Date", pd.to_datetime('today') - pd.DateOffset(years=selected_period))
 
-
-# Date input widget
-selected_start_date = st.date_input("Select Start Date", pd.to_datetime('today') - pd.DateOffset(years=selected_period))
 
 
 # Append "SPY" to the selected_tickerlist
@@ -137,7 +135,12 @@ cov_corr_df = pd.DataFrame(cov_corr_data)
 # Sort the DataFrame in ascending order of Covariance with SPY
 sorted_cov_corr_df = cov_corr_df.sort_values(by='Covariance with SPY', ascending=True)
 
+
+
 # Display the sorted DataFrame in a table with numbered index
+sorted_cov_corr_df['New data'] = sorted_cov_corr_df['Covariance with SPY'] / 0.000182
+print(sorted_cov_corr_df)
+
 sorted_cov_corr_df.reset_index(drop=True, inplace=True)
 sorted_cov_corr_df.index = sorted_cov_corr_df.index + 1
 st.subheader("Top 10 Tickers with Correlation and Covariance")

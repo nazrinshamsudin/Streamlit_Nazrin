@@ -43,7 +43,7 @@ dataframes = []
 st.sidebar.header("Settings")
 # Fetching selected period from the sidebar
 selected_period = st.sidebar.slider("Select Period (Years)", min_value=3, max_value=7)
-selected_data = fetch_company_data(selected_tickers, period=f"{selected_period}y")
+selected_data = fetch_company_data(selected_tickers + ["SPY"], period=f"{selected_period}y")
 
 selected_tickerlist = st.sidebar.multiselect("Select Tickers", sp500_tickers, ["AAPL", "MSFT", "AMZN", "GOOGL"])
 

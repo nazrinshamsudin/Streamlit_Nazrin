@@ -30,7 +30,8 @@ selected_tickers.append("SPY")
 selected_data = fetch_company_data(selected_tickers, period=selected_period)
 
 spy_data = fetch_company_data("SPY", f"{selected_period}y")
-spy_data = spy_data.resample('D').ffill()
+spy_data = spy_data.resample('D').ffill()  # Resample to daily frequency and forward-fill missing data
+spy_data = spy_data.loc[spy_data.index >= selected_data.index.min()]
 
 # DISPLAY TABLE
 st.subheader("SPY Stock data")

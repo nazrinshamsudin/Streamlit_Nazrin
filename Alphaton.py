@@ -75,9 +75,9 @@ if selected_tickerlist:
     # Fetch and display SPY data separately
     spy_data = fetch_company_data("SPY", period=f"{selected_period}y")
     # Fetch and display SPY data separately
-    start_date_str = selected_start_date.strftime("%Y-%m-%d")
-    today_str = pd.to_datetime('today').date().strftime("%Y-%m-%d")
-    spy_data = fetch_company_data("SPY", period=f"{start_date_str} - {today_str}")
+    # start_date_str = selected_start_date.strftime("%Y-%m-%d")
+    # today_str = pd.to_datetime('today').date().strftime("%Y-%m-%d")
+    # spy_data = fetch_company_data("SPY", period=f"{start_date_str} - {today_str}")
 
     if spy_data is not None:
         st.subheader("SPY Stock data")

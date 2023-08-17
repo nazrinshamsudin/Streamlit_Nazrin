@@ -62,7 +62,7 @@ sp500_tickers = pd.read_html(sp500_table)[0]["Symbol"].tolist()
 st.sidebar.header("Settings")
 selected_period = st.sidebar.slider("Select Period (Years)", min_value=1, max_value=7, value=5)
 selected_tickerlist = st.sidebar.multiselect("Select Tickers", sp500_tickers, ["AAPL", "MSFT", "AMZN", "GOOGL","META", "NVDA", "TSLA"])
-selected_start_date = st.sidebar.date_input("Select Start Date", pd.to_datetime('today') - pd.DateOffset(years=selected_period))
+
 
 
 
@@ -148,12 +148,16 @@ st.subheader("Top 10 Tickers with Correlation and Covariance")
 st.table(sorted_cov_corr_df[['Ticker', 'Correlation with SPY', 'Covariance with SPY']].head(10))
 
 
+selected_start_date = st.sidebar.date_input("Select Start Date", pd.to_datetime('today') - pd.DateOffset(years=selected_period))
+st.sidebar.write(f"Selected Start Date: {selected_start_date.date()}")
+
 
 # Create the scatter plot using Plotly Go
 scatter_fig = go.Figure()
 
 # Filter the selected_data_returns based on the selected start date
 selected_data_returns_filtered = selected_data_returns[selected_start_date:]
+
 
 
 # Adding scatter plot for selected companies
@@ -176,6 +180,14 @@ for ticker, covariance, correlation in zip(cov_corr_df["Ticker"], cov_corr_df["C
         text=ticker,
         showarrow=False
     )
+
+# Add a text annotation to display the selected start date
+scatter_fig.add_annotation(
+    x=0.1,  # Adjust the x-coordinate to position the text
+    y=0.9,  # Adjust the y-coordinate to position the text
+    text=f"Selected Start Date: {selected_start_date.date()}",
+    showarrow=False
+)
 
 # Adding a green and bigger dot for SPY as a benchmark
 scatter_fig.add_trace(go.Scatter(

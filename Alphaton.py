@@ -42,13 +42,12 @@ dataframes = []
 st.sidebar.header("Settings")
 # Fetching selected period from the sidebar
 selected_period = st.sidebar.slider("Select Period (Years)", min_value=3, max_value=7)
+selected_data = fetch_company_data(selected_tickers, period=f"{selected_period}y")
+
 selected_tickerlist = st.sidebar.multiselect("Select Tickers", sp500_tickers, ["AAPL", "MSFT", "AMZN", "GOOGL"])
 
-# Fetch data for selected tickers and period
-selected_data = fetch_company_data(selected_tickerlist, period=f"{selected_period}y", interval="1d")
 
 if selected_data is not None:
-    selected_data = fetch_company_data(selected_tickers, period=f"{selected_period}y", interval="1d")
     selected_data_returns = selected_data['Adj Close'].pct_change()
     selected_data_returns.dropna(inplace=True)  # Drop rows with NaN values
 

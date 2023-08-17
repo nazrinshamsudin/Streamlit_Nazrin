@@ -141,7 +141,7 @@ for ticker, covariance, correlation in zip(cov_corr_df["Ticker"], cov_corr_df["C
     scatter_fig.add_trace(go.Scatter(
         x=[correlation],
         y=[covariance],
-        mode='markers+text',
+        mode='markers',
         marker=dict(size=15),
         text=[f"{ticker} (Cov: {covariance:.2f}, Corr: {correlation:.2f})"],
         hoverinfo='text',

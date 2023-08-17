@@ -58,7 +58,7 @@ sp500_tickers = pd.read_html(sp500_table)[0]["Symbol"].tolist()
 # Sidebar Settings
 st.sidebar.header("Settings")
 selected_period = st.sidebar.slider("Select Period (Years)", min_value=1, max_value=7, value=5)
-selected_tickerlist = st.sidebar.multiselect("Select Tickers", sp500_tickers, ["AAPL", "MSFT", "AMZN", "GOOGL","META", "NVDA", "TSLA", "BRK.B", "UNH", "GOOG"])
+selected_tickerlist = st.sidebar.multiselect("Select Tickers", sp500_tickers, ["AAPL", "MSFT", "AMZN", "GOOGL","META", "NVDA", "TSLA"])
 
 # Append "SPY" to the selected_tickerlist
 if "SPY" not in selected_tickerlist:

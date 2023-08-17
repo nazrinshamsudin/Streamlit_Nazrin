@@ -162,7 +162,8 @@ selected_data = fetch_company_data(selected_tickerlist, period=f"{selected_perio
 # Adding scatter plot for selected companies
 for ticker, covariance, correlation in zip(cov_corr_df["Ticker"], cov_corr_df["Covariance with SPY"], cov_corr_df["Correlation with SPY"]):
     if selected_data is not None:
-        data_within_date_range = selected_data[(selected_data.index >= selected_start_date) & (selected_data.index <= pd.to_datetime('today'))]
+        data_within_date_range = selected_data[(selected_data.index >= selected_start_date.normalize()) & (selected_data.index <= pd.to_datetime('today'))]
+
         if not data_within_date_range.empty:
             scatter_fig.add_trace(go.Scatter(
                 x=[correlation],

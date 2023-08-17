@@ -57,7 +57,7 @@ sp500_tickers = pd.read_html(sp500_table)[0]["Symbol"].tolist()
 
 # Sidebar Settings
 st.sidebar.header("Settings")
-selected_period = st.sidebar.slider("Select Period (Years)", min_value=3, max_value=7, value=5)
+selected_period = st.sidebar.slider("Select Period (Years)", min_value=1, max_value=7, value=5)
 selected_tickerlist = st.sidebar.multiselect("Select Tickers", sp500_tickers, ["AAPL", "MSFT", "AMZN", "GOOGL", "NVDA"])
 
 # Append "SPY" to the selected_tickerlist
@@ -80,7 +80,7 @@ if selected_tickerlist:
         st.dataframe(selected_data)
 
 
-# Calculate correlation_matrix and other necessary data
+# Calculate correlation adn covariance_matrix and other necessary data
 if selected_data is not None:
     selected_data_returns = selected_data['Adj Close'].pct_change()
     selected_data_returns.dropna(inplace=True)

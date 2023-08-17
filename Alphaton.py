@@ -30,6 +30,7 @@ selected_tickers.append("SPY")
 selected_data = fetch_company_data(selected_tickers, period=selected_period)
 
 spy_data = fetch_company_data("SPY", f"{selected_period}y")
+spy_data = spy_data.resample('D').ffill()
 
 # DISPLAY TABLE
 st.subheader("SPY Stock data")

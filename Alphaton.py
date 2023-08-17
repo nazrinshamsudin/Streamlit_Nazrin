@@ -14,7 +14,7 @@ def fetch_company_data(tickers, period):
     print(tickers, "str")
     
     try:
-         data = yf.download(tickers, period='1y', interval="1d", rounding=True, threads=True)
+         data = yf.download(tickers, period=period, interval="1d", rounding=True, threads=True)
          return data
     except KeyError:
         print(f"No data found for tickers: {tickers}")
@@ -40,13 +40,12 @@ st.dataframe(spy_data)
 dataframes = []
 
 st.sidebar.header("Settings")
-selected_period = st.sidebar.slider("Select Period (Years)", min_value=3, max_value=7, value=5)
-selected_tickerlist = st.sidebar.multiselect("Select Tickers", sp500_tickers, sp500_tickers)
+selected_period = st.sidebar.slider("Select Period (Years)", min_value=3, max_value=7)
+selected_tickerlist = st.sidebar.multiselect("Select Tickers", sp500_tickers, ["AAPL", "MSFT", "AMZN", "GOOGL"])
 
-if selected_tickerlist:
-    selected_data = fetch_company_data(selected_tickerlist + ["SPY"], period=f"{selected_period}y")
-
+selected_data = fetch_company_data(selected_tickers, period=f"{selected_period}y", interval="1d")
 if selected_data is not None:
+    selected_data = fetch_company_data(selected_tickers, period=f"{selected_period}y", interval="1d")
     selected_data_returns = selected_data['Adj Close'].pct_change()
     selected_data_returns.dropna(inplace=True)  # Drop rows with NaN values
 

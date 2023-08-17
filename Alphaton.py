@@ -62,7 +62,11 @@ sp500_tickers = pd.read_html(sp500_table)[0]["Symbol"].tolist()
 st.sidebar.header("Settings")
 selected_period = st.sidebar.slider("Select Period (Years)", min_value=1, max_value=7, value=5)
 selected_tickerlist = st.sidebar.multiselect("Select Tickers", sp500_tickers, ["AAPL", "MSFT", "AMZN", "GOOGL","META", "NVDA", "TSLA"])
+selected_start_date = st.sidebar.date_input("Select Start Date", pd.to_datetime('today') - pd.DateOffset(years=selected_period))
 
+# Display selected start date in the sidebar
+if selected_start_date:
+    st.sidebar.write(f"Selected Start Date: {selected_start_date}")
 
 
 

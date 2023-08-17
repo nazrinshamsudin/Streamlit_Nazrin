@@ -90,6 +90,14 @@ if selected_data is not None:
     covariance_matrix = selected_data_returns.cov()
 
 
+
+
+# Display top 10 ticker names with their correlation and covariance values
+st.subheader("Top 10 Tickers with Correlation and Covariance")
+top_tickers = cov_corr_df.nlargest(10, ['Covariance with SPY', 'Correlation with SPY'])
+st.table(top_tickers[['Ticker', 'Correlation with SPY', 'Covariance with SPY']])
+
+
 # Create a correlation heatmap
 st.subheader("Correlation Table")
 st.dataframe(correlation_matrix.style.background_gradient(cmap='coolwarm'))

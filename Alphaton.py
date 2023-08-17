@@ -152,7 +152,7 @@ for ticker, covariance, correlation in zip(cov_corr_df["Ticker"], cov_corr_df["C
     scatter_fig.add_annotation(
         x=correlation,
         y=covariance,
-        xshift=-20,  # Shift the text to the left
+        xshift=-24,  # Shift the text to the left
         text=ticker,
         showarrow=False
     )

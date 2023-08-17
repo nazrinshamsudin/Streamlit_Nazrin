@@ -45,7 +45,7 @@ selected_period = st.sidebar.slider("Select Period (Years)", min_value=3, max_va
 selected_tickerlist = st.sidebar.multiselect("Select Tickers", sp500_tickers, ["AAPL", "MSFT", "AMZN", "GOOGL", "NVDA"])
 
 if selected_tickerlist:
-    selected_data = fetch_company_data(selected_tickerlist, period=f"{selected_period}y")
+    selected_data = fetch_company_data(selected_tickerlist + ["SPY"], period=f"{selected_period}y")
 
 if selected_data is not None:
     selected_data_returns = selected_data['Adj Close'].pct_change()

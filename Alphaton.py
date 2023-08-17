@@ -20,38 +20,43 @@ def fetch_company_data(tickers, period):
         print(f"No data found for tickers: {tickers}")
         return None
 
-# Load S&P 500 tickers
 sp500_table = wikipedia.page("List_of_S%26P_500_companies").html().encode("UTF-8")
 sp500_tickers = pd.read_html(sp500_table)[0]["Symbol"].tolist()
 
-# Sidebar Settings
+selected_tickers = ["AAPL", "MSFT", "AMZN", "GOOGL", "NVDA"]
+selected_period = '1y'
+
+selected_tickers.append("SPY")
+selected_data = fetch_company_data(selected_tickers, period=selected_period)
+
+spy_data = fetch_company_data("SPY", f"{selected_period}y")
+spy_data = spy_data.resample('D').ffill()  # Resample to daily frequency and forward-fill missing data
+spy_data = spy_data.loc[spy_data.index >= selected_data.index.min()]
+
+# DISPLAY TABLE
+st.subheader("SPY Stock data")
+spy_data['Return'] = spy_data["Close"] - spy_data["Open"]
+spy_data['Return%'] = (spy_data["Close"] - spy_data["Open"]) / spy_data['Open'] * 100
+st.dataframe(spy_data)
+
+dataframes = []
+
 st.sidebar.header("Settings")
 selected_period = st.sidebar.slider("Select Period (Years)", min_value=3, max_value=7, value=5)
 selected_tickerlist = st.sidebar.multiselect("Select Tickers", sp500_tickers, ["AAPL", "MSFT", "AMZN", "GOOGL", "NVDA"])
 
-# Append "SPY" to the selected_tickerlist and fetch SPY data separately
-if "SPY" not in selected_tickerlist:
-    selected_tickerlist.append("SPY")
-
 if selected_tickerlist:
-    selected_data = fetch_company_data(selected_tickerlist, period=f"{selected_period}y")
-    spy_data = fetch_company_data("SPY", period=f"{selected_period}y")
-    if spy_data is not None and selected_data is not None:
-        selected_data = selected_data.join(spy_data['Adj Close'], on=selected_data.index, rsuffix='_SPY')
+    selected_data = fetch_company_data(selected_tickerlist + ["SPY"], period=f"{selected_period}y")
 
-
-# Display SPY Stock data
-st.subheader("SPY Stock data")
-if spy_data is not None:
-    spy_data['Return'] = spy_data["Close"] - spy_data["Open"]
-    spy_data['Return%'] = (spy_data["Close"] - spy_data["Open"]) / spy_data['Open'] * 100
-    st.dataframe(spy_data)
-
-# Display Selected Companies data
-st.subheader("Selected Companies data")
 if selected_data is not None:
-    st.dataframe(selected_data)
+    selected_data_returns = selected_data['Adj Close'].pct_change()
+    selected_data_returns.dropna(inplace=True)  # Drop rows with NaN values
 
+    correlation_matrix = selected_data_returns.corr()
+    covariance_matrix = selected_data_returns.cov()
+
+    benchmark_returns = selected_data_returns["SPY"]
+    relative_returns = selected_data_returns.div(benchmark_returns, axis=0)
 
 # Create a correlation heatmap
 st.subheader("Correlation Table")

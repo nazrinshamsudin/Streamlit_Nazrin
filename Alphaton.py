@@ -37,29 +37,50 @@ st.dataframe(spy_data)
 
 dataframes = []
 
+
+# FETCHING DATA AND DECLARING VARIABLE OF DATA
+def fetch_company_data(tickers, period):
+    try:
+        data = yf.download(tickers, period=period, interval="1d", rounding=True, threads=True)
+        return data
+    except KeyError:
+        print(f"No data found for tickers: {tickers}")
+        return None
+
+# Load S&P 500 tickers
+sp500_table = wikipedia.page("List_of_S%26P_500_companies").html().encode("UTF-8")
+sp500_tickers = pd.read_html(sp500_table)[0]["Symbol"].tolist()
+
+
+
+
+
+
+
+
+# Sidebar Settings
 st.sidebar.header("Settings")
 selected_period = st.sidebar.slider("Select Period (Years)", min_value=3, max_value=7, value=5)
 selected_tickerlist = st.sidebar.multiselect("Select Tickers", sp500_tickers, ["AAPL", "MSFT", "AMZN", "GOOGL", "NVDA"])
 
+# Append "SPY" to the selected_tickerlist
+if "SPY" not in selected_tickerlist:
+    selected_tickerlist.append("SPY")
+
 if selected_tickerlist:
-    selected_data = fetch_company_data(selected_tickerlist + ["SPY"], period=f"{selected_period}y")
+    # Fetch and display SPY data separately
+    spy_data = fetch_company_data("SPY", period=f"{selected_period}y")
+    if spy_data is not None:
+        st.subheader("SPY Stock data")
+        spy_data['Return'] = spy_data["Close"] - spy_data["Open"]
+        spy_data['Return%'] = (spy_data["Close"] - spy_data["Open"]) / spy_data['Open'] * 100
+        st.dataframe(spy_data)
 
-if selected_data is not None:
-    selected_data_returns = selected_data['Adj Close'].pct_change()
-    selected_data_returns.dropna(inplace=True)  # Drop rows with NaN values
-
-    correlation_matrix = selected_data_returns.corr()
-    covariance_matrix = selected_data_returns.cov()
-
-    benchmark_returns = selected_data_returns["SPY"]
-    relative_returns = selected_data_returns.div(benchmark_returns, axis=0)
-
-
-
-
-st.subheader("Selected Companies data")
-st.dataframe(selected_data)
-
+    # Fetch and display selected companies data
+    selected_data = fetch_company_data(selected_tickerlist, period=f"{selected_period}y")
+    if selected_data is not None:
+        st.subheader("Selected Companies data")
+        st.dataframe(selected_data)
 
 # Create a correlation heatmap
 st.subheader("Correlation Table")
@@ -68,6 +89,9 @@ st.dataframe(correlation_matrix.style.background_gradient(cmap='coolwarm'))
 # Create a covariance heatmap
 st.subheader("Covariance Table")
 st.dataframe(covariance_matrix.style.background_gradient(cmap='coolwarm'))
+
+
+
 
 
 

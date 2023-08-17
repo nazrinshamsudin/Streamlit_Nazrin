@@ -92,10 +92,6 @@ if selected_data is not None:
 
 
 
-# Display top 10 ticker names with their correlation and covariance values
-st.subheader("Top 10 Tickers with Correlation and Covariance")
-top_tickers = cov_corr_df.nlargest(10, ['Covariance with SPY', 'Correlation with SPY'])
-st.table(top_tickers[['Ticker', 'Correlation with SPY', 'Covariance with SPY']])
 
 
 # Create a correlation heatmap
@@ -121,6 +117,11 @@ for ticker in selected_tickerlist:
     cov_corr_data.append({"Ticker": ticker, "Covariance with SPY": covariance, "Correlation with SPY": correlation})
 
 cov_corr_df = pd.DataFrame(cov_corr_data)
+# Display top 10 ticker names with their correlation and covariance values
+st.subheader("Top 10 Tickers with Correlation and Covariance")
+top_tickers = cov_corr_df.nlargest(10, ['Covariance with SPY', 'Correlation with SPY'])
+st.table(top_tickers[['Ticker', 'Correlation with SPY', 'Covariance with SPY']])
+
 
 # Create the scatter plot using Plotly Go
 scatter_fig = go.Figure()

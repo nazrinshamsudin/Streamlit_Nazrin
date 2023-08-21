@@ -161,14 +161,12 @@ st.table(sorted_cov_corr_df[['Ticker', 'Correlation with SPY', 'Covariance with 
 
 
 #SPY only data
-spy_covariance = cov_corr_df.loc[cov_corr_df["Ticker"] == "SPY", "Covariance"].values[0]
+selected_data['Scaled Covariance'] = selected_data['Covariance'] / spy_covariance
 
 #Calculate the new scale value of covariance
 # sorted_cov_corr_df['Scaled Covariance'] = sorted_cov_corr_df['Covariance with SPY'] / 0.000182
 # print(sorted_cov_corr_df)
 
-scaled_covariance = covariance / spy_covariance
-sorted_cov_corr_df['Scaled Covariance'] = scaled_covariance
 
 
 # Create the scatter plot using Plotly Go

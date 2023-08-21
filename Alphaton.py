@@ -147,7 +147,17 @@ cov_corr_df = pd.DataFrame(cov_corr_data)
 
 
 
+# Sort the DataFrame in ascending order of Covariance with SPY
+sorted_cov_corr_df = cov_corr_df.sort_values(by='Covariance with SPY', ascending=True)
+sorted_cov_cor_df = cov_corr_df.sort_values(by='Correlation with SPY', ascending=True)
 
+
+
+#DISPLAY THE TABLE OF CORRRELATION AND COVARIANCE
+sorted_cov_corr_df.reset_index(drop=True, inplace=True)
+sorted_cov_corr_df.index = sorted_cov_corr_df.index + 1
+st.subheader("Top 10 Tickers with Correlation and Covariance")
+st.table(sorted_cov_corr_df[['Ticker', 'Correlation with SPY', 'Covariance with SPY']].head(10))
 
 
 
@@ -163,18 +173,6 @@ cov_corr_df = pd.DataFrame(cov_corr_data)
 sorted_cov_corr_df['Scaled Covariance'] = sorted_cov_corr_df['Covariance with SPY'] / spy_covariance
 print(sorted_cov_corr_df['Scaled Covariance'])
 print(sorted_cov_corr_df)
-
-# Sort the DataFrame in ascending order of Covariance with SPY
-sorted_cov_corr_df = cov_corr_df.sort_values(by='Covariance with SPY', ascending=True)
-sorted_cov_cor_df = cov_corr_df.sort_values(by='Scaled Covariance', ascending=True)
-
-
-#DISPLAY THE TABLE OF CORRRELATION AND COVARIANCE
-sorted_cov_corr_df.reset_index(drop=True, inplace=True)
-sorted_cov_corr_df.index = sorted_cov_corr_df.index + 1
-st.subheader("Top 10 Tickers with Correlation and Covariance")
-st.table(sorted_cov_corr_df[['Ticker', 'Correlation with SPY', 'Covariance with SPY']].head(10))
-
 
 # Display the sorted DataFrame in a table with numbered index
 # sorted_cov_corr_df['New data'] = sorted_cov_corr_df['Covariance with SPY'] / 0.000182

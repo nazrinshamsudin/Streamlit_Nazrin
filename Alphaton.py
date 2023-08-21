@@ -190,6 +190,7 @@ scatter_fig = go.Figure()
 
 # Adding scatter plot for selected companies
 for ticker, scaled_covariance, correlation in zip(cov_corr_df["Ticker"], sorted_cov_corr_df["Scaled Covariance"], cov_corr_df["Correlation with SPY"]):
+    scaled_covariance = pd.to_numeric(scaled_covariance)
     scatter_fig.add_trace(go.Scatter(
         x=[correlation],
         y=[scaled_covariance],
@@ -235,6 +236,7 @@ scatter_fig.update_layout(
     xaxis_title="Correlation",
     yaxis_title="Covariance",
     template="plotly_white",
+    yaxis=dict(range=[0, 1]),
     # width = 700, # set widdth and height accord to specifics pixels
     # height=600
 
@@ -244,4 +246,3 @@ scatter_fig.update_layout(
 
 # Display the scatter plot
 st.plotly_chart(scatter_fig)
-#In this version, I've added a loop to iterate through the selected tickers and added scatter plot dots for each ticker. The x-coordinate of each dot represents the correlation with SPY, and the y-coordinate represents the covariance with SPY. This configuration creates a scatter plot with each ticker's dot placed according to its correlation and covariance with SPY. The name parameter is set to the ticker's symbol for labeling each dot.

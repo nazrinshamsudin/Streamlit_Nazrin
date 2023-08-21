@@ -163,7 +163,8 @@ st.table(sorted_cov_corr_df[['Ticker', 'Correlation with SPY', 'Covariance with 
 
 
 #SPY only data
-sorted_cov_cor_df["Scaled Covariance"] = sorted_cov_cor_df['Covariance with SPY'] / spy_covariance
+sorted_cov_cor_df['Scaled Covariance'] = sorted_cov_cor_df['Covariance with SPY'] / spy_covariance
+print(sorted_cov_cor_df)
 
 # Calculate the covariance of SPY
 #spy_covariance = spy_data['Return'].cov(spy_data['Return'])

@@ -214,6 +214,17 @@ for ticker, scaled_covariance, correlation, original_covariance in zip(
         showarrow=False
     )
 
+# Update scatter plot layout
+scatter_fig.update_layout(
+    title="Covariance vs Correlation (SPY as a Benchmark)",
+    xaxis_title="Correlation",
+    yaxis_title="Covariance",
+    template="plotly_white",
+    yaxis=dict(range=[0, 1]),  # Adjust the y-axis range here
+)
+
+# Display the scatter plot
+st.plotly_chart(scatter_fig)
 
 
 

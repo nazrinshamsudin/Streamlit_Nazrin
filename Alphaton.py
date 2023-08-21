@@ -171,7 +171,7 @@ st.table(sorted_cov_corr_df[['Ticker', 'Correlation with SPY', 'Covariance with 
 # sorted_cov_corr_df['Scaled Covariance'] = sorted_cov_corr_df['Covariance with SPY'] / 0.000182
 # print(sorted_cov_corr_df)
 
-sorted_cov_corr_df['Scaled Covariance'] = sorted_cov_corr_df['Covariance with SPY'] / spy_covariance_df
+sorted_cov_corr_df['Scaled Covariance'] = sorted_cov_corr_df['Covariance with SPY'] / spy_covariance_df['spy_covariance']
 print(sorted_cov_cor_df)
 print("Columns in cov_corr_df:", cov_corr_df.columns)
 print("Columns in sorted_cov_corr_df:", sorted_cov_corr_df.columns)

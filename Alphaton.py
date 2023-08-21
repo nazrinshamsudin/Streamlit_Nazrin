@@ -201,7 +201,7 @@ for ticker, scaled_covariance, correlation, original_covariance in zip(
         y=[scaled_covariance_numeric],
         mode='markers',
         marker=dict(size=15),
-        text=[f"{ticker} (Cov: {scaled_covariance:.6f}, Corr: {correlation:.2f})"],  # Using original_covariance here
+        text=[f"{ticker} (Cov: {scaled_covariance_numeric:.6f}, Corr: {correlation:.2f})"],  # Using original_covariance here
         hoverinfo='text',
         name=ticker
     ))

@@ -53,11 +53,6 @@ sp500_tickers = pd.read_html(sp500_table)[0]["Symbol"].tolist()
 
 
 
-
-
-
-
-
 # Sidebar Settings
 st.sidebar.header("Settings")
 selected_period = st.sidebar.slider("Select Period (Years)", min_value=1, max_value=7, value=5)
@@ -87,6 +82,11 @@ if selected_tickerlist:
         spy_data['Return'] = spy_data["Close"] - spy_data["Open"]
         spy_data['Return%'] = (spy_data["Close"] - spy_data["Open"]) / spy_data['Open'] * 100
         st.dataframe(spy_data)
+
+
+        # Calculate the covariance of SPY
+        spy_covariance = spy_data['Return'].cov(spy_data['Return'])
+
 
     # Fetch and display selected companies data
     selected_data = fetch_company_data(selected_tickerlist, period=f"{selected_period}y")

@@ -194,14 +194,13 @@ for ticker, scaled_covariance, correlation, original_covariance in zip(
     sorted_cov_corr_df["Covariance with SPY"]
 ):
 
-    scaled_covariance_numeric = pd.to_numeric(scaled_covariance)  # Convert to numeric
 
     scatter_fig.add_trace(go.Scatter(
         x=[correlation],
-        y=[scaled_covariance_numeric],
+        y=[scaled_covariance],
         mode='markers',
         marker=dict(size=15),
-        text=[f"{ticker} (Cov: {scaled_covariance_numeric:.6f}, Corr: {correlation:.2f})"],  # Using original_covariance here
+        text=[f"{ticker} (Cov: {scaled_covariance:.6f}, Corr: {correlation:.2f})"],  # Using original_covariance here
         hoverinfo='text',
         name=ticker
     ))
@@ -209,7 +208,7 @@ for ticker, scaled_covariance, correlation, original_covariance in zip(
     # Add annotation to display ticker name
     scatter_fig.add_annotation(
         x=correlation,
-        y=scaled_covariance_numeric,
+        y=scaled_covariance,
         xshift=-24,
         text=ticker,
         showarrow=False

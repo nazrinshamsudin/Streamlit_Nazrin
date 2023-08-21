@@ -84,7 +84,7 @@ if selected_tickerlist:
         st.dataframe(spy_data)
         spy_covariance = spy_data['Return'].cov(spy_data['Return'])
         # spy_covariance_df = pd.DataFrame(spy_covariance)
-        print(spy_covariance)
+        #print(spy_covariance)
 
 
     
@@ -145,12 +145,7 @@ sorted_cov_corr_df = cov_corr_df.sort_values(by='Covariance with SPY', ascending
 sorted_cov_cor_df = cov_corr_df.sort_values(by='Correlation with SPY', ascending=True)
 
 
-# Display the sorted DataFrame in a table with numbered index
-#sorted_cov_corr_df['New data'] = sorted_cov_corr_df['Covariance with SPY'] / 0.000182
-
-# sorted_cov_corr_df['New data2'] = sorted_cov_corr_df['Correlation with SPY'] /0.000182
-# print(sorted_cov_corr_df)
-# #New_data = 
+ 
 
 
 
@@ -172,10 +167,16 @@ st.table(sorted_cov_corr_df[['Ticker', 'Correlation with SPY', 'Covariance with 
 # print(sorted_cov_corr_df)
 
 sorted_cov_corr_df['Scaled Covariance'] = sorted_cov_corr_df['Covariance with SPY'] / spy_covariance
+print(sorted_cov_corr_df['Scaled Covariance'])
 
-print(sorted_cov_cor_df)
-print("Columns in cov_corr_df:", cov_corr_df.columns)
-print("Columns in sorted_cov_corr_df:", sorted_cov_corr_df.columns)
+# Display the sorted DataFrame in a table with numbered index
+sorted_cov_corr_df['New data'] = sorted_cov_corr_df['Covariance with SPY'] / 0.000182
+print(sorted_cov_corr_df['New data'])
+
+
+# print(sorted_cov_cor_df)
+# print("Columns in cov_corr_df:", cov_corr_df.columns)
+# print("Columns in sorted_cov_corr_df:", sorted_cov_corr_df.columns)
 
 # # Check DataFrame contents
 # print("cov_corr_df head:", cov_corr_df.head())
@@ -200,7 +201,7 @@ for ticker, scaled_covariance, correlation, original_covariance in zip(
         y=[scaled_covariance_numeric],
         mode='markers',
         marker=dict(size=15),
-        text=[f"{ticker} (Cov: {original_covariance:.6f}, Corr: {correlation:.2f})"],  # Using original_covariance here
+        text=[f"{ticker} (Cov: {scaled_covariance:.6f}, Corr: {correlation:.2f})"],  # Using original_covariance here
         hoverinfo='text',
         name=ticker
     ))

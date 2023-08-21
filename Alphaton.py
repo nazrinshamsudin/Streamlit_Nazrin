@@ -214,6 +214,21 @@ for ticker, scaled_covariance, correlation, original_covariance in zip(
         showarrow=False
     )
 
+
+# Add a trace for SPY with fixed correlation and covariance
+spy_correlation = 1.0
+spy_covariance = 1.0
+scatter_fig.add_trace(go.Scatter(
+    x=[spy_correlation],
+    y=[spy_covariance],
+    mode='markers',
+    marker=dict(color="lightgreen", size=21),
+    text=["SPY (Cov: 1.00, Corr: 1.00)"],
+    hoverinfo='text',
+    showlegend=False
+))
+
+
 # Update scatter plot layout
 scatter_fig.update_layout(
     title="Covariance vs Correlation (SPY as a Benchmark)",

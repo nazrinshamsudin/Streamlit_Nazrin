@@ -174,6 +174,7 @@ st.table(sorted_cov_corr_df[['Ticker', 'Correlation with SPY', 'Covariance with 
 
 sorted_cov_corr_df['Scaled Covariance'] = sorted_cov_corr_df['Covariance with SPY'] / spy_covariance
 print(sorted_cov_corr_df['Scaled Covariance'])
+print(sorted_cov_corr_df)
 
 # Display the sorted DataFrame in a table with numbered index
 # sorted_cov_corr_df['New data'] = sorted_cov_corr_df['Covariance with SPY'] / 0.000182
@@ -194,12 +195,10 @@ print(sorted_cov_corr_df['Scaled Covariance'])
 scatter_fig = go.Figure()
 
 
-
-
 for ticker, scaled_covariance, correlation, original_covariance in zip(
-    cov_corr_df["Ticker"],
+    sorted_cov_corr_df["Ticker"],
     sorted_cov_corr_df["Scaled Covariance"],
-    cov_corr_df["Correlation with SPY"],
+    sorted_cov_corr_df["Correlation with SPY"],
     sorted_cov_corr_df["Covariance with SPY"]
 ):
 

@@ -94,6 +94,8 @@ if selected_tickerlist:
         st.subheader("Selected Companies data")
         st.dataframe(selected_data)
 
+        print('spy_covariance:', spy_covariance)
+
 
 # Calculate correlation adn covariance_matrix and other necessary data
 if selected_data is not None:
@@ -161,7 +163,7 @@ st.table(sorted_cov_corr_df[['Ticker', 'Correlation with SPY', 'Covariance with 
 
 
 #SPY only data
-selected_data['Scaled Covariance'] = selected_data['Covariance'] / spy_covariance
+selected_data['Scaled Covariance'] = selected_data['covariance'] / spy_covariance
 
 #Calculate the new scale value of covariance
 # sorted_cov_corr_df['Scaled Covariance'] = sorted_cov_corr_df['Covariance with SPY'] / 0.000182

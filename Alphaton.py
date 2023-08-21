@@ -140,7 +140,7 @@ st.dataframe(covariance_matrix.style.background_gradient(cmap='coolwarm'))
 cov_corr_data = []
 for ticker in selected_tickerlist:
     correlation = correlation_matrix.loc[ticker, "SPY"]
-    covariance = spy_covariance
+    covariance = covariance_matrix.loc[ticker, "SPY"]
     cov_corr_data.append({"Ticker": ticker, "Covariance with SPY": covariance, "Correlation with SPY": correlation})
 
 cov_corr_df = pd.DataFrame(cov_corr_data)

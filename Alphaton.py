@@ -187,6 +187,10 @@ print(sorted_cov_corr_df['Scaled Covariance'])
 # Create the scatter plot using Plotly Go
 scatter_fig = go.Figure()
 
+
+sorted_cov_corr_df['Scaled Covariance'] = sorted_cov_corr_df['Covariance with SPY'] / spy_covariance
+print(sorted_cov_corr_df['Scaled Covariance'])
+
 for ticker, scaled_covariance, correlation, original_covariance in zip(
     cov_corr_df["Ticker"],
     sorted_cov_corr_df["Scaled Covariance"],

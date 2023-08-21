@@ -217,8 +217,8 @@ scatter_fig.update_layout(
     xaxis_title="Correlation",
     yaxis_title="Covariance",
     template="plotly_white",
-    width = 700, # set widdth and height accord to specifics pixels
-    height=600
+    # width = 700, # set widdth and height accord to specifics pixels
+    # height=600
 
 )
 

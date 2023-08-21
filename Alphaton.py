@@ -81,10 +81,12 @@ if selected_tickerlist:
         st.subheader("SPY Stock data")
         spy_data['Return'] = spy_data["Close"] - spy_data["Open"]
         spy_data['Return%'] = (spy_data["Close"] - spy_data["Open"]) / spy_data['Open'] * 100
-        st.dataframe(spy_data)
+       
         spy_covariance = spy_data['Return'].cov(spy_data['Return'])
+        st.dataframe(spy_data)
         # spy_covariance_df = pd.DataFrame(spy_covariance)
-        #print(spy_covariance)
+        print(spy_covariance)
+        print(spy_covariance)
 
 
     
@@ -157,17 +159,28 @@ st.table(sorted_cov_corr_df[['Ticker', 'Correlation with SPY', 'Covariance with 
 
 
 
-#SPY only data
 
+# sorted_cov_corr_df['Scaled Covariance'] = sorted_cov_corr_df['Covariance with SPY'] / spy_covariance
+# print(sorted_cov_corr_df['Scaled Covariance'])
+# print(sorted_cov_cor_df['Covariance with SPY'])
+
+
+
+if spy_covariance != 0:
+    sorted_cov_corr_df['Scaled Covariance'] = sorted_cov_corr_df['Covariance with SPY'] / spy_covariance
+else:
+    st.warning("SPY covariance is zero, unable to calculate Scaled Covariance")
 
 # Calculate the covariance of SPY
 #spy_covariance = spy_data['Return'].cov(spy_data['Return'])
 #Calculate the new scale value of covariance
-# sorted_cov_corr_df['Scaled Covariance'] = sorted_cov_corr_df['Covariance with SPY'] / 0.000182
-# print(sorted_cov_corr_df)
 
-sorted_cov_corr_df['Scaled Covariance'] = sorted_cov_corr_df['Covariance with SPY'] / spy_covariance
-print(sorted_cov_corr_df['Scaled Covariance'])
+
+# sorted_cov_corr_df['New data'] = sorted_cov_corr_df['Covariance with SPY'] / 0.000182
+# print(sorted_cov_corr_df['New data'])
+
+# sorted_cov_corr_df['Scaled Covariance'] = sorted_cov_corr_df['Covariance with SPY'] / spy_covariance
+# print(sorted_cov_corr_df['Scaled Covariance'])
 
 # Display the sorted DataFrame in a table with numbered index
 # sorted_cov_corr_df['New data'] = sorted_cov_corr_df['Covariance with SPY'] / 0.000182
@@ -188,8 +201,7 @@ print(sorted_cov_corr_df['Scaled Covariance'])
 scatter_fig = go.Figure()
 
 
-sorted_cov_corr_df['Scaled Covariance'] = sorted_cov_corr_df['Covariance with SPY'] / spy_covariance
-print(sorted_cov_corr_df['Scaled Covariance'])
+
 
 for ticker, scaled_covariance, correlation, original_covariance in zip(
     cov_corr_df["Ticker"],

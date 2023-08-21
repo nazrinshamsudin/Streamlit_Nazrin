@@ -84,8 +84,7 @@ if selected_tickerlist:
         st.dataframe(spy_data)
 
 
-        # Calculate the covariance of SPY
-        spy_covariance = spy_data['Return'].cov(spy_data['Return'])
+        
 
 
     # Fetch and display selected companies data

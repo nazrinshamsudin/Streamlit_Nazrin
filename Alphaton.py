@@ -170,8 +170,8 @@ sorted_cov_corr_df['Scaled Covariance'] = sorted_cov_corr_df['Covariance with SP
 print(sorted_cov_corr_df['Scaled Covariance'])
 
 # Display the sorted DataFrame in a table with numbered index
-sorted_cov_corr_df['New data'] = sorted_cov_corr_df['Covariance with SPY'] / 0.000182
-print(sorted_cov_corr_df['New data'])
+# sorted_cov_corr_df['New data'] = sorted_cov_corr_df['Covariance with SPY'] / 0.000182
+# print(sorted_cov_corr_df['New data'])
 
 
 # print(sorted_cov_cor_df)

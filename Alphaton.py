@@ -107,8 +107,6 @@ if selected_tickerlist:
 
 
 
-
-
 # Calculate correlation adn covariance_matrix and other necessary data
 if selected_data is not None:
     selected_data_returns = selected_data['Adj Close'].pct_change()
@@ -123,27 +121,19 @@ if selected_data is not None:
 
 
 
-# Calculate scaled covariance values and update the DataFrame
-scaled_covariance_values = []
-for ticker in selected_tickerlist:
-    scaled_covariance = covariance_matrix.loc[ticker, 'SPY'] / spy_covariance
-    scaled_covariance_values.append(scaled_covariance)
 
-    # Update the DataFrame with scaled covariance values
-for i, ticker in enumerate(selected_tickerlist):
-    sorted_cov_corr_df.loc[sorted_cov_corr_df["Ticker"] == ticker, "Covariance with SPY"] = scaled_covariance_values[i]
 
-    # Create a correlation heatmap
-    st.subheader("Correlation Table")
-    st.dataframe(correlation_matrix.style.background_gradient(cmap='coolwarm'))
 
-    # Create a covariance heatmap
-    st.subheader("Covariance Table")
-    st.dataframe(covariance_matrix.style.background_gradient(cmap='coolwarm'))
 
-     # Display the table
-    st.subheader("Top 10 Tickers with Correlation and Covariance")
-    st.table(sorted_cov_corr_df[['Ticker', 'Correlation with SPY', 'Covariance with SPY']].head(10))
+# Create a correlation heatmap
+st.subheader("Correlation Table")
+st.dataframe(correlation_matrix.style.background_gradient(cmap='coolwarm'))
+
+# Create a covariance heatmap
+st.subheader("Covariance Table")
+st.dataframe(covariance_matrix.style.background_gradient(cmap='coolwarm'))
+
+
 
 
 # Create a DataFrame for covariance and correlation data
@@ -176,12 +166,17 @@ st.table(sorted_cov_corr_df[['Ticker', 'Correlation with SPY', 'Covariance with 
 # print(sorted_cov_cor_df['Covariance with SPY'])
 
 
-# # Calculate the new covariance FORMULA of SPY
-# sorted_cov_corr_df['Scaled Covariance'] = sorted_cov_corr_df['Covariance with SPY'] / spy_covariance
-# print(sorted_cov_corr_df['Scaled Covariance'])
-# print(sorted_cov_corr_df)
-# #spy_covariance = spy_data['Return'].cov(spy_data['Return'])
-# #Calculate the new scale value of covariance
+# Calculate the covariance of SPY
+
+
+sorted_cov_corr_df['Scaled Covariance'] = sorted_cov_corr_df['Covariance with SPY'] / spy_covariance
+print(sorted_cov_corr_df['Scaled Covariance'])
+print(sorted_cov_corr_df)
+
+
+# Display the sorted DataFrame in a table with numbered index
+# sorted_cov_corr_df['New data'] = sorted_cov_corr_df['Covariance with SPY'] / 0.000182
+# print(sorted_cov_corr_df['New data'])
 
 
 # print(sorted_cov_cor_df)

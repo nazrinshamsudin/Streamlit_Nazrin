@@ -123,18 +123,17 @@ if selected_data is not None:
 
 
 
+# Calculate scaled covariance values and update the DataFrame
+scaled_covariance_values = []
+for ticker in selected_tickerlist:
+    scaled_covariance = covariance_matrix.loc[ticker, 'SPY'] / spy_covariance
+    scaled_covariance_values.append(scaled_covariance)
 
-     # Calculate scaled covariance values and update the DataFrame
-    scaled_covariance_values = []
-    for ticker in selected_tickerlist:
-        scaled_covariance = covariance_matrix.loc[ticker, 'SPY'] / spy_covariance
-        scaled_covariance_values.append(scaled_covariance)
+    # Update the DataFrame with scaled covariance values
+for i, ticker in enumerate(selected_tickerlist):
+    sorted_cov_corr_df.loc[sorted_cov_corr_df["Ticker"] == ticker, "Covariance with SPY"] = scaled_covariance_values[i]
 
-     # Update the DataFrame with scaled covariance values
-    for i, ticker in enumerate(selected_tickerlist):
-        sorted_cov_corr_df.loc[sorted_cov_corr_df["Ticker"] == ticker, "Covariance with SPY"] = scaled_covariance_values[i]
-
-        # Create a correlation heatmap
+    # Create a correlation heatmap
     st.subheader("Correlation Table")
     st.dataframe(correlation_matrix.style.background_gradient(cmap='coolwarm'))
 

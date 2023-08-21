@@ -201,15 +201,15 @@ if isinstance(selected_start_date, pd.Timestamp):
     )
 
 # Adding a green and bigger dot for SPY as a benchmark
-scatter_fig.add_trace(go.Scatter(
-    x=[1.0],  # SPY correlation is always 1
-    y=[scaled_covariance_matrix.loc["SPY", "SPY"]],  # SPY covariance with itself
-    mode='markers',
-    marker=dict(color="lightgreen", size=21),  # Dark green and bigger dot
-    text=["SPY (Cov: Max, Corr: 1.00)"],
-    hoverinfo='text',
-    showlegend=False
-))
+# scatter_fig.add_trace(go.Scatter(
+#     x=[1.0],  # SPY correlation is always 1
+#     y=[scaled_covariance_matrix.loc["SPY", "SPY"]],  # SPY covariance with itself
+#     mode='markers',
+#     marker=dict(color="lightgreen", size=21),  # Dark green and bigger dot
+#     text=["SPY (Cov: Max, Corr: 1.00)"],
+#     hoverinfo='text',
+#     showlegend=False
+# ))
 
 # Update scatter plot layout
 scatter_fig.update_layout(

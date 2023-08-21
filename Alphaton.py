@@ -82,6 +82,8 @@ if selected_tickerlist:
         spy_data['Return'] = spy_data["Close"] - spy_data["Open"]
         spy_data['Return%'] = (spy_data["Close"] - spy_data["Open"]) / spy_data['Open'] * 100
         st.dataframe(spy_data)
+        spy_covariance = spy_data['Return'].cov(spy_data['Return'])
+        
 
 
         
@@ -94,7 +96,6 @@ if selected_tickerlist:
         st.dataframe(selected_data)
 
        
-
 
 # Calculate correlation adn covariance_matrix and other necessary data
 if selected_data is not None:
@@ -162,7 +163,7 @@ st.table(sorted_cov_corr_df[['Ticker', 'Correlation with SPY', 'Covariance with 
 
 
 #SPY only data
-sorted_cov_corr_df['Scaled Covariance'] = sorted_cov_cor_df['Covariance with SPY'] / 0.000182
+sorted_cov_corr_df['Scaled Covariance'] = sorted_cov_cor_df['Covariance with SPY'] / spy_covariance
 # Calculate the covariance of SPY
 #spy_covariance = spy_data['Return'].cov(spy_data['Return'])
 #Calculate the new scale value of covariance

@@ -148,7 +148,7 @@ cov_corr_df = pd.DataFrame(cov_corr_data)
 
 
 # Sort the DataFrame in ascending order of Covariance with SPY
-sorted_cov_corr_df = cov_corr_df.sort_values(by='Scaled Covariance', ascending=True)
+sorted_cov_corr_df = cov_corr_df.sort_values(by='Covariance with SPY', ascending=True)
 sorted_cov_cor_df = cov_corr_df.sort_values(by='Correlation with SPY', ascending=True)
 
 

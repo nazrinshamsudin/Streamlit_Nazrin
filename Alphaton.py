@@ -163,7 +163,8 @@ st.table(sorted_cov_corr_df[['Ticker', 'Correlation with SPY', 'Covariance with 
 
 #SPY only data
 sorted_cov_corr_df['Scaled Covariance'] = sorted_cov_cor_df['Covariance with SPY'] / 0.000182
-
+# Calculate the covariance of SPY
+#spy_covariance = spy_data['Return'].cov(spy_data['Return'])
 #Calculate the new scale value of covariance
 # sorted_cov_corr_df['Scaled Covariance'] = sorted_cov_corr_df['Covariance with SPY'] / 0.000182
 # print(sorted_cov_corr_df)
@@ -208,7 +209,7 @@ if isinstance(selected_start_date, pd.Timestamp):
 #Adding a green and bigger dot for SPY as a benchmark
 scatter_fig.add_trace(go.Scatter(
     x=[1.0],  # SPY correlation is always 1
-    y=[scaled_covariance.loc],  # SPY covariance with itself
+    y=[1.0],  # SPY covariance with itself
     mode='markers',
     marker=dict(color="lightgreen", size=21),  # Dark green and bigger dot
     text=["SPY (Cov: Max, Corr: 1.00)"],

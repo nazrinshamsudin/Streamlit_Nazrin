@@ -146,7 +146,7 @@ sorted_cov_cor_df = cov_corr_df.sort_values(by='Correlation with SPY', ascending
 
 
 # Display the sorted DataFrame in a table with numbered index
-sorted_cov_corr_df['New data'] = sorted_cov_corr_df['Covariance with SPY'] / 0.000182
+#sorted_cov_corr_df['New data'] = sorted_cov_corr_df['Covariance with SPY'] / 0.000182
 
 # sorted_cov_corr_df['New data2'] = sorted_cov_corr_df['Correlation with SPY'] /0.000182
 # print(sorted_cov_corr_df)

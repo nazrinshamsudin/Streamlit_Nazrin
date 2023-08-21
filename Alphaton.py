@@ -142,8 +142,7 @@ if selected_data is not None:
     st.subheader("Top 10 Tickers with Correlation and Covariance")
     st.table(sorted_cov_corr_df[['Ticker', 'Correlation with SPY', 'Covariance with SPY']].head(10))
 
-#This should fix the error and display the scaled covariance values correctly in the table.
-Regenerate
+#This should fix the error and display the scaled covariance values correctly in the table. Regenerate
 
 
 
@@ -156,30 +155,30 @@ st.subheader("Covariance Table")
 st.dataframe(covariance_matrix.style.background_gradient(cmap='coolwarm'))
 
 
-# Create a DataFrame for covariance and correlation data
-cov_corr_data = []
-for ticker in selected_tickerlist:
-    correlation = correlation_matrix.loc[ticker, "SPY"]
+# # Create a DataFrame for covariance and correlation data
+# cov_corr_data = []
+# for ticker in selected_tickerlist:
+#     correlation = correlation_matrix.loc[ticker, "SPY"]
   
-    scaled_covariance = sorted_cov_corr_df.loc[sorted_cov_corr_df["Ticker"] == ticker, "Scaled Covariance"].values[0]  # Get scaled covariance
-    cov_corr_data.append({"Ticker": ticker, "Covariance with SPY": scaled_covariance, "Correlation with SPY": correlation})
+#     scaled_covariance = sorted_cov_corr_df.loc[sorted_cov_corr_df["Ticker"] == ticker, "Scaled Covariance"].values[0]  # Get scaled covariance
+#     cov_corr_data.append({"Ticker": ticker, "Covariance with SPY": scaled_covariance, "Correlation with SPY": correlation})
 
-cov_corr_df = pd.DataFrame(cov_corr_data)
-
-
-
-# Sort the DataFrame in ascending order of Covariance with SPY
-# Sort the DataFrame in ascending order of Covariance with SPY
-sorted_cov_corr_df = cov_corr_df.sort_values(by='Covariance with SPY', ascending=True)
-sorted_cov_cor_df = cov_corr_df.sort_values(by='Correlation with SPY', ascending=True)
+# cov_corr_df = pd.DataFrame(cov_corr_data)
 
 
 
-#DISPLAY THE TABLE OF CORRRELATION AND COVARIANCE
-sorted_cov_corr_df.reset_index(drop=True, inplace=True)
-sorted_cov_corr_df.index = sorted_cov_corr_df.index + 1
-st.subheader("Top 10 Tickers with Correlation and Covariance")
-st.table(sorted_cov_corr_df[['Ticker', 'Correlation with SPY', 'Covariance with SPY']].head(10))
+# # Sort the DataFrame in ascending order of Covariance with SPY
+# # Sort the DataFrame in ascending order of Covariance with SPY
+# sorted_cov_corr_df = cov_corr_df.sort_values(by='Covariance with SPY', ascending=True)
+# sorted_cov_cor_df = cov_corr_df.sort_values(by='Correlation with SPY', ascending=True)
+
+
+
+# #DISPLAY THE TABLE OF CORRRELATION AND COVARIANCE
+# sorted_cov_corr_df.reset_index(drop=True, inplace=True)
+# sorted_cov_corr_df.index = sorted_cov_corr_df.index + 1
+# st.subheader("Top 10 Tickers with Correlation and Covariance")
+# st.table(sorted_cov_corr_df[['Ticker', 'Correlation with SPY', 'Covariance with SPY']].head(10))
 
 
 

@@ -93,7 +93,7 @@ if selected_tickerlist:
         st.subheader("Selected Companies data")
         st.dataframe(selected_data)
 
-        print('spy_covariance:', spy_covariance)
+       
 
 
 # Calculate correlation adn covariance_matrix and other necessary data

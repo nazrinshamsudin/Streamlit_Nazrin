@@ -83,8 +83,8 @@ if selected_tickerlist:
         spy_data['Return%'] = (spy_data["Close"] - spy_data["Open"]) / spy_data['Open'] * 100
         st.dataframe(spy_data)
         spy_covariance = spy_data['Return'].cov(spy_data['Return'])
-        spy_covariance_df = pd.DataFrame({'SPY Covariance' : [spy_covariance]})
-        print(spy_covariance_df)
+        # spy_covariance_df = pd.DataFrame(spy_covariance)
+        print(spy_covariance)
 
 
     
@@ -171,7 +171,9 @@ st.table(sorted_cov_corr_df[['Ticker', 'Correlation with SPY', 'Covariance with 
 # sorted_cov_corr_df['Scaled Covariance'] = sorted_cov_corr_df['Covariance with SPY'] / 0.000182
 # print(sorted_cov_corr_df)
 
-sorted_cov_corr_df['Scaled Covariance'] = sorted_cov_corr_df['Covariance with SPY'] / spy_covariance_df['spy_covariance']
+sorted_cov_corr_df['Scaled Covariance'] = sorted_cov_corr_df['Covariance with SPY'] / spy_covariance
+
+
 print(sorted_cov_cor_df)
 print("Columns in cov_corr_df:", cov_corr_df.columns)
 print("Columns in sorted_cov_corr_df:", sorted_cov_corr_df.columns)

@@ -144,8 +144,6 @@ sorted_cov_corr_df = cov_corr_df.sort_values(by='Covariance with SPY', ascending
 sorted_cov_cor_df = cov_corr_df.sort_values(by='Correlation with SPY', ascending=True)
 
 
-sorted_cov_cor_df['Scaled Covariance'] = sorted_cov_cor_df['Covariance with SPY'] / spy_covariance
-print(sorted_cov_cor_df)
 # Display the sorted DataFrame in a table with numbered index
 #sorted_cov_corr_df['New data'] = sorted_cov_corr_df['Covariance with SPY'] / 0.000182
 
@@ -172,12 +170,22 @@ st.table(sorted_cov_corr_df[['Ticker', 'Correlation with SPY', 'Covariance with 
 # sorted_cov_corr_df['Scaled Covariance'] = sorted_cov_corr_df['Covariance with SPY'] / 0.000182
 # print(sorted_cov_corr_df)
 
+sorted_cov_cor_df['Scaled Covariance'] = sorted_cov_cor_df['Covariance with SPY'] / spy_covariance
+print("Columns in cov_corr_df:", cov_corr_df.columns)
+print("Columns in sorted_cov_corr_df:", sorted_cov_corr_df.columns)
+
+# Check DataFrame contents
+print("cov_corr_df head:", cov_corr_df.head())
+print("sorted_cov_corr_df head:", sorted_cov_corr_df.head())
+
 
 
 # Create the scatter plot using Plotly Go
 scatter_fig = go.Figure()
 
-
+# Sort the DataFrames by "Ticker" column
+cov_corr_df.sort_values(by="Ticker", inplace=True)
+sorted_cov_corr_df.sort_values(by="Ticker", inplace=True)
 
 # Adding scatter plot for selected companies
 for ticker, scaled_covariance, correlation in zip(cov_corr_df["Ticker"], sorted_cov_corr_df["Scaled Covariance"], cov_corr_df["Correlation with SPY"]):

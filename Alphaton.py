@@ -196,34 +196,60 @@ for ticker, scaled_covariance, correlation in zip(
     sorted_cov_corr_df["Covariance with SPY"]
 ):
 
-   
+    scaled_covariance_numeric = pd.to_numeric(scaled_covariance)  # Convert to numeric
+
     scatter_fig.add_trace(go.Scatter(
         x=[correlation],
-        y=[scaled_covariance],
+        y=[scaled_covariance_numeric],
         mode='markers',
         marker=dict(size=15),
-        text=[f"{ticker} (Cov: {scaled_covariance:.2f}, Corr: {correlation:.2f})"],
+        text=[f"{ticker} (Cov: {original_covariance:.6f}, Corr: {correlation:.2f})"],  # Using original_covariance here
         hoverinfo='text',
         name=ticker
     ))
 
-   # Add annotation to display ticker name
+    # Add annotation to display ticker name
     scatter_fig.add_annotation(
         x=correlation,
-        y=scaled_covariance,
-        xshift=-24,  # Shift the text to the left
+        y=scaled_covariance_numeric,
+        xshift=-24,
         text=ticker,
         showarrow=False
     )
 
-# Add a text annotation to display the selected start date
-if isinstance(selected_start_date, pd.Timestamp):
-    scatter_fig.add_annotation(
-        x=0.1,  # Adjust the x-coordinate to position the text
-        y=0.9,  # Adjust the y-coordinate to position the text
-        text=f"Selected Start Date: {selected_start_date.date()}",
-        showarrow=False
-    )
+# Update scatter plot layout
+scatter_fig.update_layout(
+    title="Covariance vs Correlation (SPY as a Benchmark)",
+    xaxis_title="Correlation",
+    yaxis_title="Covariance",
+    template="plotly_white",
+    yaxis=dict(range=[0, 1]),  # Adjust the y-axis range here
+)
+
+# Display the scatter plot
+st.plotly_chart(scatter_fig)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# # Add a text annotation to display the selected start date
+# if isinstance(selected_start_date, pd.Timestamp):
+#     scatter_fig.add_annotation(
+#         x=0.1,  # Adjust the x-coordinate to position the text
+#         y=0.9,  # Adjust the y-coordinate to position the text
+#         text=f"Selected Start Date: {selected_start_date.date()}",
+#         showarrow=False
+#     )
 
 #Adding a green and bigger dot for SPY as a benchmark
 # scatter_fig.add_trace(go.Scatter(
@@ -236,19 +262,6 @@ if isinstance(selected_start_date, pd.Timestamp):
 #     showlegend=False
 # ))
 
-# Update scatter plot layout
-scatter_fig.update_layout(
-    title="Covariance vs Correlation (SPY as a Benchmark)",
-    xaxis_title="Correlation",
-    yaxis_title="Covariance",
-    template="plotly_white",
 
     # width = 700, # set widdth and height accord to specifics pixels
     # height=600
-
-)
-
-
-
-# Display the scatter plot
-st.plotly_chart(scatter_fig)

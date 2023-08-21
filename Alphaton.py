@@ -185,7 +185,7 @@ for ticker, scaled_covariance, correlation in zip(cov_corr_df["Ticker"], sorted_
    # Add annotation to display ticker name
     scatter_fig.add_annotation(
         x=correlation,
-        y=covariance,
+        y=scaled_covariance,
         xshift=-24,  # Shift the text to the left
         text=ticker,
         showarrow=False
@@ -203,7 +203,7 @@ if isinstance(selected_start_date, pd.Timestamp):
 # Adding a green and bigger dot for SPY as a benchmark
 scatter_fig.add_trace(go.Scatter(
     x=[1.0],  # SPY correlation is always 1
-    y=[covariance_matrix.loc["SPY", "SPY"]],  # SPY covariance with itself
+    y=[scaled_covariance_matrix.loc["SPY", "SPY"]],  # SPY covariance with itself
     mode='markers',
     marker=dict(color="lightgreen", size=21),  # Dark green and bigger dot
     text=["SPY (Cov: Max, Corr: 1.00)"],

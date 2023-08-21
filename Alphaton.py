@@ -184,8 +184,8 @@ for ticker, scaled_covariance, correlation in zip(cov_corr_df["Ticker"], sorted_
 
    # Add annotation to display ticker name
     scatter_fig.add_annotation(
-        x=Correlation,
-        y=Covariance,
+        x=correlation,
+        y=covariance,
         xshift=-24,  # Shift the text to the left
         text=ticker,
         showarrow=False

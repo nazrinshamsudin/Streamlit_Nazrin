@@ -161,7 +161,7 @@ st.table(sorted_cov_corr_df[['Ticker', 'Correlation with SPY', 'Covariance with 
 
 #Calculate the new scale value of covariance
 sorted_cov_corr_df['Scaled Covariance'] = sorted_cov_corr_df['Covariance with SPY'] / 0.000182
-
+print(sorted_cov_corr_df)
 
 
 
@@ -213,7 +213,7 @@ if isinstance(selected_start_date, pd.Timestamp):
 
 # Update scatter plot layout
 scatter_fig.update_layout(
-    title="Covariance vs Correlation (Benchmark: SPY)",
+    title="Covariance vs Correlation (SPY as a Benchmark)",
     xaxis_title="Correlation with SPY",
     yaxis_title="Covariance with SPY",
     template="plotly_white"

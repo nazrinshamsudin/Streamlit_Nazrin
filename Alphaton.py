@@ -104,6 +104,13 @@ if selected_tickerlist:
         st.subheader("Selected Companies data")
         st.dataframe(selected_data)
 
+# Create a correlation heatmap
+st.subheader("Correlation Table")
+st.dataframe(correlation_matrix.style.background_gradient(cmap='coolwarm'))
+
+# Create a covariance heatmap
+st.subheader("Covariance Table")
+st.dataframe(covariance_matrix.style.background_gradient(cmap='coolwarm'))
 
 
 
@@ -137,16 +144,6 @@ if selected_data is not None:
 
 
 #This should fix the error and display the scaled covariance values correctly in the table. Regenerate
-
-
-
-# Create a correlation heatmap
-st.subheader("Correlation Table")
-st.dataframe(correlation_matrix.style.background_gradient(cmap='coolwarm'))
-
-# Create a covariance heatmap
-st.subheader("Covariance Table")
-st.dataframe(covariance_matrix.style.background_gradient(cmap='coolwarm'))
 
 
 # # Create a DataFrame for covariance and correlation data

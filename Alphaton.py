@@ -171,7 +171,7 @@ scatter_fig = go.Figure()
 
 
 # Adding scatter plot for selected companies
-for ticker, covariance, correlation in zip(cov_corr_df["Ticker"], sorted_cov_corr_df["Scaled Covariance"], cov_corr_df["Correlation with SPY"]):
+for ticker, scaled_covariance, correlation in zip(cov_corr_df["Ticker"], sorted_cov_corr_df["Scaled Covariance"], cov_corr_df["Correlation with SPY"]):
     scatter_fig.add_trace(go.Scatter(
         x=[correlation],
         y=[scaled_covariance],

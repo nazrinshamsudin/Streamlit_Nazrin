@@ -163,7 +163,7 @@ st.table(sorted_cov_corr_df[['Ticker', 'Correlation with SPY', 'Covariance with 
 
 
 #SPY only data
-selected_data['Scaled Covariance'] = cov_corr_df['Covariance with SPY'] / spy_covariance
+sorted_cov_corr_df['Scaled Covariance'] = cov_corr_df['Covariance with SPY'] / spy_covariance
 
 #Calculate the new scale value of covariance
 # sorted_cov_corr_df['Scaled Covariance'] = sorted_cov_corr_df['Covariance with SPY'] / 0.000182
@@ -177,7 +177,7 @@ scatter_fig = go.Figure()
 
 
 # Adding scatter plot for selected companies
-for ticker, scaled_covariance, correlation in zip(cov_corr_df["Ticker"], selected_data["Scaled Covariance"], cov_corr_df["Correlation with SPY"]):
+for ticker, scaled_covariance, correlation in zip(cov_corr_df["Ticker"], sorted_cov_corr_df["Scaled Covariance"], cov_corr_df["Correlation with SPY"]):
     scatter_fig.add_trace(go.Scatter(
         x=[correlation],
         y=[scaled_covariance],

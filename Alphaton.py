@@ -119,18 +119,11 @@ if selected_data is not None:
     spy_covariance = covariance_matrix.loc['SPY', 'SPY']
     print(spy_covariance)
 
-    scaled_covariance_value = []
-
-    for ticker in selected_tickerlist:
-        scaled_covariance = covariance_matrix.loc[ticker, 'SPY'] / spy_covariance
-        scaled_covariance_values.append(scaled_covariance)
-
-
-    # Create a DataFrame for covariance and correlation data
+    # Calculate scaled covariance values and update the DataFrame
     cov_corr_data = []
-    for i, ticker in enumerate(selected_tickerlist):
+    for ticker in selected_tickerlist:
         correlation = correlation_matrix.loc[ticker, "SPY"]
-        scaled_covariance = scaled_covariance_values[i]
+        scaled_covariance = covariance_matrix.loc[ticker, 'SPY'] / spy_covariance
         cov_corr_data.append({"Ticker": ticker, "Covariance with SPY": scaled_covariance, "Correlation with SPY": correlation})
 
     cov_corr_df = pd.DataFrame(cov_corr_data)
@@ -141,6 +134,7 @@ if selected_data is not None:
     # Display the table
     st.subheader("Top 10 Tickers with Correlation and Covariance")
     st.table(sorted_cov_corr_df[['Ticker', 'Correlation with SPY', 'Covariance with SPY']].head(10))
+
 
 #This should fix the error and display the scaled covariance values correctly in the table. Regenerate
 

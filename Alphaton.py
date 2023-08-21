@@ -186,10 +186,7 @@ print("Columns in sorted_cov_corr_df:", sorted_cov_corr_df.columns)
 # Create the scatter plot using Plotly Go
 scatter_fig = go.Figure()
 
-
-
-# Adding scatter plot for selected companies
-for ticker, scaled_covariance, correlation in zip(
+for ticker, scaled_covariance, correlation, original_covariance in zip(
     cov_corr_df["Ticker"],
     sorted_cov_corr_df["Scaled Covariance"],
     cov_corr_df["Correlation with SPY"],
@@ -216,19 +213,6 @@ for ticker, scaled_covariance, correlation in zip(
         text=ticker,
         showarrow=False
     )
-
-# Update scatter plot layout
-scatter_fig.update_layout(
-    title="Covariance vs Correlation (SPY as a Benchmark)",
-    xaxis_title="Correlation",
-    yaxis_title="Covariance",
-    template="plotly_white",
-    yaxis=dict(range=[0, 1]),  # Adjust the y-axis range here
-)
-
-# Display the scatter plot
-st.plotly_chart(scatter_fig)
-
 
 
 

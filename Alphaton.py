@@ -144,7 +144,8 @@ sorted_cov_corr_df = cov_corr_df.sort_values(by='Covariance with SPY', ascending
 sorted_cov_cor_df = cov_corr_df.sort_values(by='Correlation with SPY', ascending=True)
 
 
-
+sorted_cov_cor_df['Scaled Covariance'] = sorted_cov_cor_df['Covariance with SPY'] / spy_covariance
+print(sorted_cov_cor_df)
 # Display the sorted DataFrame in a table with numbered index
 #sorted_cov_corr_df['New data'] = sorted_cov_corr_df['Covariance with SPY'] / 0.000182
 
@@ -163,8 +164,7 @@ st.table(sorted_cov_corr_df[['Ticker', 'Correlation with SPY', 'Covariance with 
 
 
 #SPY only data
-sorted_cov_cor_df['Scaled Covariance'] = sorted_cov_cor_df['Covariance with SPY'] / spy_covariance
-print(sorted_cov_cor_df)
+
 
 # Calculate the covariance of SPY
 #spy_covariance = spy_data['Return'].cov(spy_data['Return'])

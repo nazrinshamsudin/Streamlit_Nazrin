@@ -190,13 +190,13 @@ scatter_fig = go.Figure()
 
 # Adding scatter plot for selected companies
 for ticker, scaled_covariance, correlation in zip(cov_corr_df["Ticker"], sorted_cov_corr_df["Scaled Covariance"], cov_corr_df["Correlation with SPY"]):
-    scaled_covariance = pd.to_numeric(scaled_covariance)
+    scaled_covariance_numeric = pd.to_numeric(scaled_covariance)
     scatter_fig.add_trace(go.Scatter(
         x=[correlation],
-        y=[scaled_covariance],
+        y=[scaled_covariance_numeric],
         mode='markers',
         marker=dict(size=15),
-        text=[f"{ticker} (Cov: {scaled_covariance:.2f}, Corr: {correlation:.2f})"],
+        text=[f"{ticker} (Cov: {scaled_covariance_numeric:.2f}, Corr: {correlation:.2f})"],
         hoverinfo='text',
         name=ticker
     ))
@@ -204,7 +204,7 @@ for ticker, scaled_covariance, correlation in zip(cov_corr_df["Ticker"], sorted_
    # Add annotation to display ticker name
     scatter_fig.add_annotation(
         x=correlation,
-        y=scaled_covariance,
+        y=scaled_covariance_numeric,
         xshift=-24,  # Shift the text to the left
         text=ticker,
         showarrow=False
@@ -236,7 +236,7 @@ scatter_fig.update_layout(
     xaxis_title="Correlation",
     yaxis_title="Covariance",
     template="plotly_white",
-    yaxis=dict(range=[0, 1]),
+
     # width = 700, # set widdth and height accord to specifics pixels
     # height=600
 

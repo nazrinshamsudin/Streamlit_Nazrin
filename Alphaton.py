@@ -139,12 +139,18 @@ cov_corr_df = pd.DataFrame(cov_corr_data)
 
 # Sort the DataFrame in ascending order of Covariance with SPY
 sorted_cov_corr_df = cov_corr_df.sort_values(by='Covariance with SPY', ascending=True)
+sorted_cov_cor_df = cov_corr_df.sort_values(by='Correlation with SPY', ascending=True)
 
 
 
 # Display the sorted DataFrame in a table with numbered index
 sorted_cov_corr_df['New data'] = sorted_cov_corr_df['Covariance with SPY'] / 0.000182
+
+sorted_cov_corr_df['New data2'] = sorted_cov_corr_df['Correlation with SPY'] /0.000182
 print(sorted_cov_corr_df)
+#New_data = 
+
+
 
 sorted_cov_corr_df.reset_index(drop=True, inplace=True)
 sorted_cov_corr_df.index = sorted_cov_corr_df.index + 1

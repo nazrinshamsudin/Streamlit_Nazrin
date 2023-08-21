@@ -216,7 +216,10 @@ scatter_fig.update_layout(
     title="Covariance vs Correlation (SPY as a Benchmark)",
     xaxis_title="Correlation with SPY",
     yaxis_title="Covariance with SPY",
-    template="plotly_white"
+    template="plotly_white",
+    width = 800, # set widdth and height accord to specifics pixels
+    height=600
+
 )
 
 

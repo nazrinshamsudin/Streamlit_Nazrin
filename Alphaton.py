@@ -220,7 +220,7 @@ scatter_fig.update_layout(
     xaxis_title="Correlation",
     yaxis_title="Covariance",
     template="plotly_white",
-    yaxis=dict(range=[0, 1]),  # Adjust the y-axis range here
+    #yaxis=dict(range=[0, 1]),  # Adjust the y-axis range here
 )
 
 # Display the scatter plot

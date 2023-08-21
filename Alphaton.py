@@ -161,7 +161,7 @@ st.table(sorted_cov_corr_df[['Ticker', 'Correlation with SPY', 'Covariance with 
 
 
 #SPY only data
-spy_covariance = cov_corr_df.loc[cov_corr_df["Ticker"] == "SPY", "Covariance"].value[0]
+spy_covariance = cov_corr_df.loc[cov_corr_df["Ticker"] == "SPY", "Covariance"].values[0]
 
 #Calculate the new scale value of covariance
 # sorted_cov_corr_df['Scaled Covariance'] = sorted_cov_corr_df['Covariance with SPY'] / 0.000182

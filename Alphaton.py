@@ -146,9 +146,9 @@ sorted_cov_cor_df = cov_corr_df.sort_values(by='Correlation with SPY', ascending
 # Display the sorted DataFrame in a table with numbered index
 sorted_cov_corr_df['New data'] = sorted_cov_corr_df['Covariance with SPY'] / 0.000182
 
-sorted_cov_corr_df['New data2'] = sorted_cov_corr_df['Correlation with SPY'] /0.000182
-print(sorted_cov_corr_df)
-#New_data = 
+# sorted_cov_corr_df['New data2'] = sorted_cov_corr_df['Correlation with SPY'] /0.000182
+# print(sorted_cov_corr_df)
+# #New_data = 
 
 
 
@@ -159,27 +159,33 @@ st.table(sorted_cov_corr_df[['Ticker', 'Correlation with SPY', 'Covariance with 
 
 
 
+#Calculate the new scale value of covariance
+sorted_cov_corr_df['Scaled Covariance'] = sorted_cov_corr_df['Covariance with SPY'] / 0.000182
+
+
+
+
 # Create the scatter plot using Plotly Go
 scatter_fig = go.Figure()
 
 
 
 # Adding scatter plot for selected companies
-for ticker, covariance, correlation in zip(cov_corr_df["Ticker"], cov_corr_df["Covariance with SPY"], cov_corr_df["Correlation with SPY"]):
+for ticker, covariance, correlation in zip(cov_corr_df["Ticker"], sorted_cov_corr_df["Scaled Covariance"], cov_corr_df["Correlation with SPY"]):
     scatter_fig.add_trace(go.Scatter(
         x=[correlation],
-        y=[covariance],
+        y=[scaled_covariance],
         mode='markers',
         marker=dict(size=15),
-        text=[f"{ticker} (Cov: {covariance:.2f}, Corr: {correlation:.2f})"],
+        text=[f"{ticker} (Cov: {scaled_covariance:.2f}, Corr: {correlation:.2f})"],
         hoverinfo='text',
         name=ticker
     ))
 
    # Add annotation to display ticker name
     scatter_fig.add_annotation(
-        x=correlation,
-        y=covariance,
+        x=Correlation,
+        y=Covariance,
         xshift=-24,  # Shift the text to the left
         text=ticker,
         showarrow=False

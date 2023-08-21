@@ -175,7 +175,7 @@ sorted_cov_cor_df = cov_corr_df.sort_values(by='Correlation with SPY', ascending
 sorted_cov_corr_df.reset_index(drop=True, inplace=True)
 sorted_cov_corr_df.index = sorted_cov_corr_df.index + 1
 st.subheader("Top 10 Tickers with Correlation and Covariance")
-st.table(sorted_cov_corr_df[['Ticker', 'Correlation with SPY', 'Covariance with SPY']].head(10))
+st.table(sorted_cov_corr_df[['Ticker', 'Correlation with SPY', 'Scaled Covariance']].head(10))
 
 
 

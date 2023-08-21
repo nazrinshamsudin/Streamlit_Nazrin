@@ -83,11 +83,11 @@ if selected_tickerlist:
         spy_data['Return%'] = (spy_data["Close"] - spy_data["Open"]) / spy_data['Open'] * 100
         st.dataframe(spy_data)
         spy_covariance = spy_data['Return'].cov(spy_data['Return'])
-        
+        spy_covariance_df = pd.DataFrame({'SPY Covariance' : [spy_covariance]})
+        print(spy_covariance_df)
 
 
-        
-
+    
 
     # Fetch and display selected companies data
     selected_data = fetch_company_data(selected_tickerlist, period=f"{selected_period}y")
@@ -95,7 +95,8 @@ if selected_tickerlist:
         st.subheader("Selected Companies data")
         st.dataframe(selected_data)
 
-       
+
+
 
 # Calculate correlation adn covariance_matrix and other necessary data
 if selected_data is not None:
@@ -170,13 +171,14 @@ st.table(sorted_cov_corr_df[['Ticker', 'Correlation with SPY', 'Covariance with 
 # sorted_cov_corr_df['Scaled Covariance'] = sorted_cov_corr_df['Covariance with SPY'] / 0.000182
 # print(sorted_cov_corr_df)
 
-sorted_cov_corr_df['Scaled Covariance'] = sorted_cov_corr_df['Covariance with SPY'] / spy_covariance
+sorted_cov_corr_df['Scaled Covariance'] = sorted_cov_corr_df['Covariance with SPY'] / spy_covariance_df
+print(sorted_cov_cor_df)
 print("Columns in cov_corr_df:", cov_corr_df.columns)
 print("Columns in sorted_cov_corr_df:", sorted_cov_corr_df.columns)
 
-# Check DataFrame contents
-print("cov_corr_df head:", cov_corr_df.head())
-print("sorted_cov_corr_df head:", sorted_cov_corr_df.head())
+# # Check DataFrame contents
+# print("cov_corr_df head:", cov_corr_df.head())
+# print("sorted_cov_corr_df head:", sorted_cov_corr_df.head())
 
 
 

@@ -187,9 +187,6 @@ print("Columns in sorted_cov_corr_df:", sorted_cov_corr_df.columns)
 # Create the scatter plot using Plotly Go
 scatter_fig = go.Figure()
 
-# Sort the DataFrames by "Ticker" column
-cov_corr_df.sort_values(by="Ticker", inplace=True)
-sorted_cov_corr_df.sort_values(by="Ticker", inplace=True)
 
 # Adding scatter plot for selected companies
 for ticker, scaled_covariance, correlation in zip(cov_corr_df["Ticker"], sorted_cov_corr_df["Scaled Covariance"], cov_corr_df["Correlation with SPY"]):

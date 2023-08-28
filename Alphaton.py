@@ -22,7 +22,9 @@ def fetch_company_data(tickers, period):
         return None
 
 sp500_table = wikipedia.page("List_of_S%26P_500_companies").html().encode("UTF-8")
-sp500_tickers = pd.read_html(sp500_table)[0]["Symbol"].tolist()
+df = pd.read_html(sp500_table)[0]
+sp500_tickers = df["Symbol"].tolist()
+
 
 selected_tickers = ["AAPL", "MSFT", "AMZN", "GOOGL", "NVDA"]
 selected_period = '1y'

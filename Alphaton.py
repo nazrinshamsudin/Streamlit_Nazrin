@@ -21,7 +21,7 @@ def fetch_company_data(tickers, period):
         print(f"No data found for tickers: {tickers}")
         return None
 
-sp500_table = wikipedia.page("List_of_S&P_500_companiest").html().encode("UTF-8")
+sp500_table = wikipedia.page("List_of_S&P_500_companies").html().encode("UTF-8")
 df = pd.read_html(sp500_table)[0]
 sp500_tickers = df["Symbol"].tolist()
 

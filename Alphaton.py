@@ -21,7 +21,7 @@ def fetch_company_data(tickers, period):
         print(f"No data found for tickers: {tickers}")
         return None
 
-sp500_table = wikipedia.page("List_of_S&P_500_component_stocks").html().encode("UTF-8")
+sp500_table = wikipedia.page("List_of_S&P_500_companies").html().encode("UTF-8")
 df = pd.read_html(sp500_table)[0]
 sp500_tickers = df["Symbol"].tolist()
 
@@ -120,9 +120,6 @@ if selected_data is not None:
 
 
 
-
-
-
 # Create a correlation heatmap
 st.subheader("Correlation Table")
 st.dataframe(correlation_matrix.style.background_gradient(cmap='coolwarm'))
@@ -156,7 +153,6 @@ sorted_cov_corr_df.reset_index(drop=True, inplace=True)
 sorted_cov_corr_df.index = sorted_cov_corr_df.index + 1
 st.subheader("Top 10 Tickers with Correlation and Covariance")
 st.table(sorted_cov_corr_df[['Ticker', 'Correlation with SPY', 'Covariance with SPY']].head(10))
-
 
 
 
